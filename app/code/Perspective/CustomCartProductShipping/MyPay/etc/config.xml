@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Viktoriia Sira <viktoriia.s@perspectiveteam.com>
+ * All Rights Reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <shipping>
+            <perspectiveshipping>
+                <update_price>
+                    <min_shipping_cost>2</min_shipping_cost>
+                </update_price>
+            </perspectiveshipping>
+        </shipping>
+    </default>
+</config>

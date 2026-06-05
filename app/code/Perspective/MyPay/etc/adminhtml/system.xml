@@ -1,0 +1,109 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Viktoriia Sira <viktoriia.s@perspectiveteam.com>
+ * All Rights Reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="payment">
+            <group id="perspectivemypaygroup" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Perspective MyPay</label>
+                <field id="active" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" canRestore="1">
+                    <label>Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="order_status" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" canRestore="1">
+                    <label>New Order Status</label>
+                    <source_model>Magento\Sales\Model\Config\Source\Order\Status\NewStatus</source_model>
+                </field>
+                <field id="sort_order" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1">
+                    <label>Sort Order</label>
+                    <frontend_class>validate-number</frontend_class>
+                </field>
+                <field id="title" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Title</label>
+                </field>
+                <field id="allowspecific" translate="label" type="allowspecific" sortOrder="50" showInDefault="1" showInWebsite="1" canRestore="1">
+                    <label>Payment from Applicable Countries</label>
+                    <source_model>Magento\Payment\Model\Config\Source\Allspecificcountries</source_model>
+                </field>
+                <field id="specificcountry" translate="label" type="multiselect" sortOrder="60" showInDefault="1" showInWebsite="1">
+                    <label>Payment from Specific Countries</label>
+                    <source_model>Magento\Directory\Model\Config\Source\Country</source_model>
+                    <can_be_empty>1</can_be_empty>
+                </field>
+                <field id="payable_to" translate="label" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Make Check Payable to</label>
+                </field>
+                <field id="mailing_address" translate="label" type="textarea" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Send Check to</label>
+                </field>
+                <field id="min_order_total" translate="label" type="text" sortOrder="90" showInDefault="1" showInWebsite="1">
+                    <label>Minimum Order Total</label>
+                    <validate>validate-number validate-zero-or-greater</validate>
+                </field>
+                <field id="max_order_total" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1">
+                    <label>Maximum Order Total</label>
+                    <validate>validate-number validate-zero-or-greater</validate>
+                </field>
+                <field id="model"></field>
+            </group>
+        </section>
+        <section id="sales">
+            <tab>sales</tab>
+            <group id="perspective" translate="label" type="text" sortOrder="9999" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Perspective</label>
+                <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>General</label>
+                    <field id="enabled" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1">
+                        <label>Enable Module</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                </group>
+                <group id="trade" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Trade Configuration</label>
+                    <field id="customer_group" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Customer Group</label>
+                        <source_model>Magento\Customer\Model\Customer\Source\Group</source_model>
+                    </field>
+                    <field id="quantity_of_products" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="0">
+                        <label>Quantity Of Items</label>
+                        <validate>validate-number validate-zero-or-greater</validate>
+                    </field>
+                    <field id="allowed_shipping" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Select Allowed Shipping Method</label>
+                        <source_model>Perspective\MyPay\Model\Config\Source\ShippingMethods</source_model>
+                    </field>
+                    <field id="allowed_payment" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Select Allowed Payment Method</label>
+                        <source_model>Perspective\MyPay\Model\Config\Source\PaymentMethods</source_model>
+                    </field>
+                    <depends>
+                        <field id="sales/perspective/general/enabled">1</field>
+                    </depends>
+                </group>
+                <group id="large_trade" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Large Trade Configuration</label>
+                    <field id="customer_group" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Customer Group</label>
+                        <source_model>Magento\Customer\Model\Customer\Source\Group</source_model>
+                    </field>
+                    <field id="amount_for_free_shipping" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="0">
+                        <label>Amount For Free Shipping</label>
+                        <validate>validate-number validate-zero-or-greater</validate>
+                        <comment>Minimum order amount for free shipping.</comment>
+                    </field>
+                    <field id="allowed_payment" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Select Allowed Payment Method</label>
+                        <source_model>Perspective\MyPay\Model\Config\Source\PaymentMethods</source_model>
+                    </field>
+                    <depends>
+                        <field id="sales/perspective/general/enabled">1</field>
+                    </depends>
+                </group>
+            </group>
+        </section>
+    </system>
+</config>

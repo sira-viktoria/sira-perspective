@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Viktoriia Sira <viktoriia.s@perspectiveteam.com>
+ * All Rights Reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <carriers>
+            <perspectiveshipping>
+                <active>1</active>
+                <sallowspecific>0</sallowspecific>
+                <model>Perspective\CustomCartProductShipping\Model\Carrier\Shipping</model>
+                <name>Perspective Shipping Method</name>
+                <price>10.00</price>
+                <title>Perspective Shipping Method</title>
+                <specificerrmsg>This shipping method is not available. To use this shipping method, please contact us.</specificerrmsg>
+                <handling_type>F</handling_type>
+            </perspectiveshipping>
+        </carriers>
+        <shipping>
+            <perspectiveshipping>
+                <general>
+                    <max_number_of_products>4</max_number_of_products>
+                    <max_discount>40</max_discount>
+                </general>
+            </perspectiveshipping>
+        </shipping>
+    </default>
+</config>
