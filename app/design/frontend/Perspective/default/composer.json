@@ -1,0 +1,19 @@
+
+{
+    "name": "perspective/theme-frontend-default",
+    "description": "Perspective Theme",
+    "require": {
+        "php": "~8.1.0 || ~8.2.0 || ~8.3.0",
+        "magento/theme-frontend-blank": "*"
+    },
+    "type": "magento2-theme",
+    "version": "1.0.0",
+    "license": [
+        "OSL-3.0"
+    ],
+    "autoload": {
+        "files": [
+            "registration.php"
+        ]
+    }
+}
