@@ -31,6 +31,15 @@
                                         </item>
                                     </item>
                                 </item>
+                                <item name="sidebar" xsi:type="array">
+                                    <item name="children" xsi:type="array">
+                                        <item name="perspective-sidebar-section" xsi:type="array">
+                                            <item name="component" xsi:type="string">Perspective_CheckoutCustomization/js/view/perspective-sidebar</item>
+                                            <item name="sortOrder" xsi:type="string">15</item>
+                                            <item name="displayArea" xsi:type="string">summary</item>
+                                        </item>
+                                    </item>
+                                </item>
                             </item>
                         </item>
                     </item>
