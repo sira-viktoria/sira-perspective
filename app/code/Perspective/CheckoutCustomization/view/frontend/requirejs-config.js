@@ -10,6 +10,9 @@ var config = {
             'Magento_Checkout/js/model/shipping-rates-validation-rules': {
                 'Perspective_CheckoutCustomization/js/model/shipping-rates-validation-rules-mixin': true
             }
-        }
+        },
+    'Magento_Checkout/js/view/shipping-address/list': {
+        'Perspective_CheckoutCustomization/js/view/shipping-address/list-mixin': true
+    }
     }
 };
