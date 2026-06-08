@@ -5,12 +5,12 @@
  */
 declare(strict_types=1);
 
-namespace Perspective\CheckoutCustomization\Plugin\Model\Checkout;
+namespace Perspective\CheckoutCustomization\Plugin\Block\Checkout;
 
 /**
- * LayoutProcessor Plugin.
+ * LayoutProcessorValidation Plugin.
  */
-class LayoutProcessor
+class LayoutProcessorValidation
 {
     public function afterProcess(
         \Magento\Checkout\Block\Checkout\LayoutProcessor $subject,

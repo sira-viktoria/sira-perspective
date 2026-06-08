@@ -6,6 +6,8 @@
     </type>
     <type name="Magento\Checkout\Block\Checkout\LayoutProcessor">
         <plugin name="perspective_validation_street_address" sortOrder="10"
-                type="Perspective\CheckoutCustomization\Plugin\Model\Checkout\LayoutProcessor"/>
+                type="Perspective\CheckoutCustomization\Plugin\Block\Checkout\LayoutProcessorValidation"/>
+        <plugin name="perspective_default_value" sortOrder="20"
+                type="Perspective\CheckoutCustomization\Plugin\Block\Checkout\LayoutProcessorDefaultValue"/>
     </type>
 </config>
