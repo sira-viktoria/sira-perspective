@@ -27,6 +27,11 @@
                                                         </item>
                                                     </item>
                                                 </item>
+                                                <item name="perspective-check-login-step" xsi:type="array">
+                                                    <item name="component" xsi:type="string">Perspective_CheckoutCustomization/js/view/check-login-step</item>
+                                                    <item name="sortOrder" xsi:type="string">2</item>
+                                                    <item name="children" xsi:type="array"></item>
+                                                </item>
                                             </item>
                                         </item>
                                     </item>
