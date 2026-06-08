@@ -1,0 +1,12 @@
+
+<script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/jquery.inputmask.bundle.js"/></script>
+<script>
+    require([
+        "jquery"
+    ], function($) {
+        setTimeout(
+            function(){
+                $('input[name$="telephone"]').inputmask( "22222");
+            }, 6000);
+    });
+</script>
