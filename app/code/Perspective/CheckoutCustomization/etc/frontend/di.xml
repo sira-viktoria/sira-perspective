@@ -9,5 +9,7 @@
                 type="Perspective\CheckoutCustomization\Plugin\Block\Checkout\LayoutProcessorValidation"/>
         <plugin name="perspective_default_value" sortOrder="20"
                 type="Perspective\CheckoutCustomization\Plugin\Block\Checkout\LayoutProcessorDefaultValue"/>
+        <plugin name="perspective_add_notice" sortOrder="30"
+                type="Perspective\CheckoutCustomization\Plugin\Block\Checkout\LayoutProcessorAddNotice"/>
     </type>
 </config>
