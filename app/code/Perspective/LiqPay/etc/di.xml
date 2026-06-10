@@ -1,0 +1,14 @@
+<?xml version="1.0" ?>
+<!--
+/**
+ * LiqPay Extension for Magento 2.
+ *
+ * @author PerspectiveTeam<order@perspectiveteam.com>
+ * © Perspective. All rights reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Perspective\LiqPay\Api\LiqPayCallbackInterface"
+                type="Perspective\LiqPay\Model\LiqPayCallback"/>
+</config>

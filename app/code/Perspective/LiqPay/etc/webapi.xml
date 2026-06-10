@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * LiqPay Extension for Magento 2.
+ *
+ * @author PerspectiveTeam<order@perspectiveteam.com>
+ * © Perspective. All rights reserved.
+ */
+-->
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+    <route url="/V1/liqpay/callback" method="POST">
+        <service class="Perspective\LiqPay\Api\LiqPayCallbackInterface" method="callback"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+</routes>

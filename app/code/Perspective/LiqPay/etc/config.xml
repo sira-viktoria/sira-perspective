@@ -1,0 +1,29 @@
+<?xml version="1.0" ?>
+<!--
+/**
+ * LiqPay Extension for Magento 2.
+ *
+ * @author PerspectiveTeam<order@perspectiveteam.com>
+ * © Perspective. All rights reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <payment>
+            <perspective_liqpay>
+                <active>0</active>
+                <sandbox>1</sandbox>
+                <model>Perspective\LiqPay\Model\Payment\LiqPay</model>
+                <order_status>pending</order_status>
+                <title>Liqpay (Privat24)</title>
+                <group>perspectivemypaygroup</group>
+                <payment_action>authorize_capture</payment_action>
+                <private_key backend_model="Magento\Config\Model\Config\Backend\Encrypted"/>
+                <allowspecific>0</allowspecific>
+                <description><![CDATA[Purchase of goods in the store. Order #{order_id}.]]></description>
+                <security_check>1</security_check>
+            </perspective_liqpay>
+        </payment>
+    </default>
+</config>

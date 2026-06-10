@@ -1,0 +1,22 @@
+<?xml version="1.0" ?>
+<!--
+/**
+ * LiqPay Extension for Magento 2.
+ *
+ * @author PerspectiveTeam<order@perspectiveteam.com>
+ * © Perspective. All rights reserved.
+ */
+-->
+<payment xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Payment:etc/payment.xsd">
+    <groups>
+        <group id="perspective_liqpay_group">
+            <label>Perspective Payment Methods</label>
+        </group>
+    </groups>
+    <methods>
+        <method name="perspective_liqpay">
+            <allow_multiple_address>1</allow_multiple_address>
+        </method>
+    </methods>
+</payment>
