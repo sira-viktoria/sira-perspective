@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Viktoriia Sira <viktoriia.s@perspectiveteam.com>
+ * All Rights Reserved.
+ */
+-->
+<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Widget:etc/widget.xsd">
+    <widget id="sold_today_products" class="Perspective\SoldTodayWidget\Block\SoldProducts"
+            placeholder_image="Magento_Catalog::images/product_widget_preview.png">
+        <label translate="true">Sold Today Products</label>
+        <description translate="true">Displays products from the current product category that have been purchased in the last 24 hours.</description>
+        <parameters>
+            <parameter name="products_number" xsi:type="text" visible="true" required="true">
+                <label translate="true">Number of Products to Display</label>
+                <description translate="true">The maximum number of items to display in the widget (e.g. 4).</description>
+                <value>4</value>
+            </parameter>
+            <parameter name="template" xsi:type="select" visible="true">
+                <label translate="true">Шаблон</label>
+                <options>
+                    <option name="default" value="Perspective_SoldTodayWidget::widget.phtml" selected="true">
+                        <label translate="true">Default Layout</label>
+                    </option>
+                </options>
+            </parameter>
+        </parameters>
+    </widget>
+</widgets>

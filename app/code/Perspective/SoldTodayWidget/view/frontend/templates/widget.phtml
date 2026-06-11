@@ -1,0 +1,55 @@
+<?php
+/** @var SoldProducts $block
+ * @var Escaper $escaper
+ * @var ProductViewModel $viewModel
+ */
+
+use Perspective\SoldTodayWidget\Block\SoldProducts;
+use Magento\Framework\Escaper;
+use Perspective\SoldTodayWidget\ViewModel\ProductViewModel;
+
+$products = $block->getSoldProducts();
+$viewModel = $block->getData('view_model');
+?>
+<?php if (!empty($products) && count($products) > 0): ?>
+    <div class="block sold-today-products-list" style="margin-top: 40px; border-top: 1px solid #e8e8e8; padding-top: 20px;">
+        <div class="block-title title">
+            <strong id="block-sold-today-heading" role="heading" aria-level="2">
+                <?= $escaper->escapeHtml(__('Sold today from this category!')) ?>
+            </strong>
+        </div>
+        <div class="block-content content" aria-labelledby="block-sold-today-heading">
+            <div class="products wrapper grid products-grid">
+                <ol class="products list items product-items">
+                    <?php foreach ($products as $product): ?>
+                    <li class="item product product-item">
+                        <div class="product-item-info">
+                            <a href="<?= $escaper->escapeUrl($product->getProductUrl()) ?>" class="product photo product-item-photo">
+                                <?php if ($viewModel): ?>
+                                    <img src="<?= $escaper->escapeUrl($viewModel->getImage($product,'product_base_image')->getUrl()) ?>"
+                                         alt="<?= $escaper->escapeHtml($product->getName()) ?>"/>
+                                <?php endif; ?>
+                            </a>
+                            <div class="product details product-item-details"">
+                            <strong class="product name product-item-name">
+                                <a class="product-item-link" href="<?= $escaper->escapeUrl($product->getProductUrl()) ?>">
+                                    <?= $escaper->escapeHtml($product->getName()) ?>
+                                </a>
+                            </strong>
+                            <?php if ($viewModel): ?>
+                                <div class="price-box price-final_price">
+                                    <span class="price"><?= /* @noEscape */ $viewModel->getProductPrice($product) ?: strip_tags($product->getPrice()) ?></span>
+                                </div>
+                            <?php endif; ?>
+                            <div class="stock available">
+                                <span><?= $escaper->escapeHtml(__('Ordered today!')) ?></span>
+                            </div>
+                        </div>
+            </div>
+            </li>
+            <?php endforeach; ?>
+            </ol>
+        </div>
+    </div>
+    </div>
+<?php endif; ?>
