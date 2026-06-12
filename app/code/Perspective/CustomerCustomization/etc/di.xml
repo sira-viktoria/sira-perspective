@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Viktoriia Sira <viktoriia.s@perspectiveteam.com>
+ * All Rights Reserved.
+ */
+-->
+<config xmlns:xsi="http://w3.org" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/di.xsd">
+    <type name="Magento\Customer\Api\CustomerRepositoryInterface">
+        <plugin name="perspective_customer_phone_unique_validation"
+                type="Perspective\CustomerCustomization\Plugin\CustomerPhoneValidation"
+                sortOrder="10"/>
+    </type>
+    <type name="Magento\Customer\Block\Widget\Dob">
+        <plugin name="perspective_customer_dob_validation"
+                type="Perspective\CustomerCustomization\Plugin\CustomerDobValidation"
+                sortOrder="10"/>
+    </type>
+</config>

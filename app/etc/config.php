@@ -371,6 +371,7 @@ return [
         'Perspective_CheckoutCustomization' => 0,
         'Perspective_CustomCartProductShipping' => 1,
         'Perspective_CustomCartProductShippingPriceFixer' => 1,
+        'Perspective_CustomerCustomization' => 1,
         'Perspective_LiqPay' => 1,
         'Perspective_MyPay' => 1,
         'Perspective_NovaposhtaCatalog' => 1,
