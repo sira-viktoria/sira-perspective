@@ -31,8 +31,7 @@ class SoldProducts extends Template implements BlockInterface
     /**
      * @var CatalogHelper
      */
-    //Test. Incorrect variable name in SonarQube error checking
-    protected CatalogHelper $_catalogHelper;
+    protected CatalogHelper $catalogHelper;
 
     /**
      * @var SearchCriteriaBuilder
