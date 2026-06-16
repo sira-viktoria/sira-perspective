@@ -183,6 +183,12 @@ define([
             $this.on('tap', function (event) {
                 event.stopPropagation();
             });
+
+            //Custom test code.
+            let $firstSwatch = this.document.find('.swatch-option').first();
+            if ($firstSwatch.length) {
+                $firstSwatch.addClass('selected').attr('aria-checked', true);
+            }
         }
     });
 
