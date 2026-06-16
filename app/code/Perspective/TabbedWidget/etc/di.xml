@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Viktoriia Sira <viktoriia.s@perspectiveteam.com>
+ * All Rights Reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <!-- For Widget Conditions Grid -->
+    <type name="Perspective\TabbedWidget\Model\ResourceModel\Condition\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">perspective_widget_conditions</argument>
+            <argument name="eventPrefix" xsi:type="string">perspective_widget_conditions_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">perspective_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Perspective\TabbedWidget\Model\ResourceModel\Condition</argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="perspective_widget_conditions_listing_data_source" xsi:type="string">Perspective\TabbedWidget\Model\ResourceModel\Condition\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

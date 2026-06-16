@@ -1,0 +1,30 @@
+<?php
+use Perspective\TabbedWidget\Block\Widget\TabbedProducts;
+use Magento\Framework\Escaper;
+/**
+ * @var TabbedProducts $block
+ * @var Escaper $escaper
+ *
+ * */
+
+$tabsCount = 3;
+?>
+
+<div class="product data items"
+     data-mage-init='{"mage/tabs": {"openedState": "active", "active": 0, "disabled": [], "disabledState": "disabled"}}'>
+    <span style="font-weight:bold; position: relative; left: 25%; top: -25px; font-size: 25px; color: deeppink">
+        <?= $escaper->escapeHtml($block->getWidgetTitle()) ?>
+    </span>
+
+    <?php for ($i = 1; $i <= $tabsCount; $i++): ?>
+        <div class="item title" data-role="collapsible">
+            <a class="switch" data-toggle="trigger" href="#widget_tab_<?= $i ?>">
+                <?= $escaper->escapeHtml($block->getTabTitle($i)) ?>
+            </a>
+        </div>
+        <div id="widget_tab_<?= $i ?>" class="item content" data-role="content">
+            <?= $block->getProductListHtml($i) ?>
+        </div>
+    <?php endfor; ?>
+
+</div>

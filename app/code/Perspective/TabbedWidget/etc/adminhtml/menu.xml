@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Viktoriia Sira <viktoriia.s@perspectiveteam.com>
+ * All Rights Reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add
+            id="Perspective_TabbedWidget::tabbed_widget"
+            title="Perspective Tabbed Widget"
+            module="Perspective_TabbedWidget"
+            sortOrder="10"
+            resource="Perspective_TabbedWidget::tabbed_widget"/>
+        <add
+            id="Perspective_TabbedWidget::widget_conditions_grid"
+            title="Widget Conditions Grid"
+            module="Perspective_TabbedWidget"
+            sortOrder="1"
+            resource="Perspective_TabbedWidget::widget_conditions_grid"
+            parent="Perspective_TabbedWidget::tabbed_widget"
+            action="widget_conditions/index/index"/>
+    </menu>
+</config>

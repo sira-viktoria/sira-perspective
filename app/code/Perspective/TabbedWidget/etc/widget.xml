@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Viktoriia Sira <viktoriia.s@perspectiveteam.com>
+ * All Rights Reserved.
+ */
+-->
+<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Widget:etc/widget.xsd">
+    <widget id="perspective_universal_widget" class="Perspective\TabbedWidget\Block\Widget\TabbedProducts">
+        <label translate="true">Universal Products Widget</label>
+        <description translate="true">Displays products.</description>
+        <parameters>
+            <!-- GENERAL SETTINGS -->
+            <parameter name="tab_custom_fieldset_separator_general" xsi:type="block" visible="true" sort_order="10">
+                <label translate="true">General</label>
+                <block class="Perspective\TabbedWidget\Block\Widget\FieldsetSeparator" />
+            </parameter>
+            <parameter name="widget_title" xsi:type="text" required="true" visible="true" sort_order="20">
+                <label translate="true">Widget Title</label>
+            </parameter>
+            <parameter name="cache_lifetime" xsi:type="text" visible="true" sort_order="30">
+                <label translate="true">Cache Lifetime (Seconds)</label>
+                <description translate="true">
+                    <![CDATA[Time in seconds between the widget updates.
+                    <br/>If not set, equals to 86400 seconds (24 hours). To update widget instantly, go to Cache Management and clear Blocks HTML Output cache.
+                    <br/>Widget will not show products that begin to match the specified conditions until cache is refreshed.]]>
+                </description>
+            </parameter>
+            <parameter name="products_count" xsi:type="text" required="true" visible="true" sort_order="40">
+                <label translate="true">Number of Products to Display</label>
+                <value>4</value>
+            </parameter>
+            <parameter name="show_pager" xsi:type="select" visible="true"  sort_order="50"
+                       source_model="Magento\Config\Model\Config\Source\Yesno">
+                <label translate="true">Display Page Control</label>
+            </parameter>
+            <parameter name="products_per_page" xsi:type="text" required="true" visible="true" sort_order="60">
+                <label translate="true">Number of Products per Page</label>
+                <depends>
+                    <parameter name="show_pager" value="1" />
+                </depends>
+                <value>2</value>
+            </parameter>
+            <parameter name="template" xsi:type="select" required="true" visible="true" sort_order="70">
+                <label>Template</label>
+                <options>
+                    <option name="default" value="Perspective_TabbedWidget::widget/universal_tab_widget.phtml" selected="true">
+                        <label translate="true">Default Template</label>
+                    </option>
+                </options>
+            </parameter>
+
+            <!-- TAB 1 -->
+            <parameter name="tab_custom_fieldset_separator_1" xsi:type="block" visible="true" sort_order="80">
+                <label translate="true">Tab 1 Options</label>
+                <block class="Perspective\TabbedWidget\Block\Widget\FieldsetSeparator" />
+            </parameter>
+            <parameter name="tab_title_1" xsi:type="text" required="false" visible="true" sort_order="90">
+                <label translate="true">Title</label>
+            </parameter>
+            <parameter name="tab_conditions_1" xsi:type="select"  required="true" visible="true" sort_order="100"
+                       source_model="Perspective\TabbedWidget\Model\Config\Source\ConditionList">
+                <label translate="true">Select Conditions</label>
+            </parameter>
+
+            <!-- TAB 2 -->
+            <parameter name="tab_custom_fieldset_separator_2" xsi:type="block" visible="true" sort_order="110">
+                <label translate="true">Tab 2 Options</label>
+                <block class="Perspective\TabbedWidget\Block\Widget\FieldsetSeparator" />
+            </parameter>
+            <parameter name="tab_title_2" xsi:type="text" required="false" visible="true" sort_order="120">
+                <label translate="true">Title</label>
+            </parameter>
+            <parameter name="tab_conditions_2" xsi:type="select"  required="true" visible="true" sort_order="130"
+                       source_model="Perspective\TabbedWidget\Model\Config\Source\ConditionList">
+                <label translate="true">Select Conditions</label>
+            </parameter>
+
+            <!-- TAB 3 -->
+            <parameter name="tab_custom_fieldset_separator_3" xsi:type="block" visible="true" sort_order="140">
+                <label translate="true">Tab 3 Options</label>
+                <block class="Perspective\TabbedWidget\Block\Widget\FieldsetSeparator" />
+            </parameter>
+            <parameter name="tab_title_3" xsi:type="text" required="false" visible="true" sort_order="150">
+                <label translate="true">Title</label>
+            </parameter>
+            <parameter name="tab_conditions_3" xsi:type="select"  required="true" visible="true" sort_order="160"
+                       source_model="Perspective\TabbedWidget\Model\Config\Source\ConditionList">
+                <label translate="true">Select Conditions</label>
+            </parameter>
+
+        </parameters>
+    </widget>
+</widgets>

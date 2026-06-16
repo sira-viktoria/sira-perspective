@@ -375,6 +375,7 @@ return [
         'Perspective_LiqPay' => 1,
         'Perspective_MyPay' => 1,
         'Perspective_NovaposhtaCatalog' => 1,
-        'Perspective_NovaposhtaShipping' => 1
+        'Perspective_NovaposhtaShipping' => 1,
+        'Perspective_TabbedWidget' => 1
     ]
 ];

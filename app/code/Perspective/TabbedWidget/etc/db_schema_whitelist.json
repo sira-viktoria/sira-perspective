@@ -1,0 +1,12 @@
+{
+    "perspective_widget_conditions": {
+        "column": {
+            "condition_id": true,
+            "name": true,
+            "conditions": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    }
+}
