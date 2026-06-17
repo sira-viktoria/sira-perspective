@@ -1,0 +1,17 @@
+<?php
+/** @var SoldProducts $block
+ * @var Escaper $escaper
+ */
+
+use Perspective\SoldTodayWidget\Block\SoldProducts;
+use Magento\Framework\Escaper;
+
+?>
+<div id="custom-pdp-widget-container"
+     data-mage-init='{"pdpWidgetLoader": {
+     "url": "<?= $escaper->escapeUrl($block->getUrl('perspective/ajax/fetch'))?>",
+      "product_id": "<?= $block->getCurrentProduct()->getId() ?>"
+      }}'
+>
+    <p>Loading...</p>
+</div>

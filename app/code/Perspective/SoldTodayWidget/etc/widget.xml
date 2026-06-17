@@ -20,7 +20,7 @@
             <parameter name="template" xsi:type="select" visible="true">
                 <label translate="true">Шаблон</label>
                 <options>
-                    <option name="default" value="Perspective_SoldTodayWidget::widget.phtml" selected="true">
+                    <option name="default" value="Perspective_SoldTodayWidget::widget/placeholder.phtml" selected="true">
                         <label translate="true">Default Layout</label>
                     </option>
                 </options>

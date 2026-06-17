@@ -1,0 +1,16 @@
+{
+    "perspective_order_item_data": {
+        "column": {
+            "id": true,
+            "order_id": true,
+            "product_id": true,
+            "sku": true,
+            "price": true,
+            "qty_ordered": true,
+            "created_at": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    }
+}

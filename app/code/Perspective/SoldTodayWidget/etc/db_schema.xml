@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="perspective_order_item_data" resource="default" engine="innodb" comment="Custom Order Item Data Table">
+
+        <column xsi:type="int" name="id" unsigned="true" nullable="false" identity="true" comment="Condition ID"/>
+        <column xsi:type="int" name="order_id" padding="10" unsigned="true" nullable="false" comment="Magento Order ID"/>
+        <column xsi:type="int" name="product_id" padding="10" unsigned="true" nullable="false" comment="Product ID"/>
+        <column xsi:type="varchar" name="sku" length="255" nullable="false" comment="Product SKU"/>
+        <column xsi:type="decimal" name="price" scale="4" precision="12" nullable="false" default="0.0000" comment="Item Price"/>
+        <column xsi:type="decimal" name="qty_ordered" scale="4" precision="12" nullable="false" default="0.0000" comment="Qty Ordered"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP" comment="Creation Time"/>
+
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+    </table>
+</schema>
