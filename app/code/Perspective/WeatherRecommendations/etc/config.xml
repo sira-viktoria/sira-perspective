@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Viktoriia Sira <viktoriia.s@perspectiveteam.com>
+ * All Rights Reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <weather_widget>
+            <general_settings>
+                <enabled>0</enabled>
+                <products_number>4</products_number>
+                <data_cache_time>180</data_cache_time>
+                <weather_api_url>https://api.openweathermap.org/data/2.5/forecast?id=524901</weather_api_url>
+                <geo_api_url>https://ipwho.is/</geo_api_url>
+            </general_settings>
+            <weather_settings>
+                <conditions>{"_1781879074108_108":{"weather":"Cold","temperature_from":"-100","temperature_to":"5","categories":[""]},"_1781879074107_107":{"weather":"Cool","temperature_from":"6","temperature_to":"15","categories":[""]},"_1781879074109_109":{"weather":"Warm","temperature_from":"16","temperature_to":"25","categories":[""]},"_1781879074128_128":{"weather":"Hot","temperature_from":"26","temperature_to":"100","categories":[""]}}</conditions>
+            </weather_settings>
+        </weather_widget>
+    </default>
+</config>

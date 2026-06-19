@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Viktoriia Sira <viktoriia.s@perspectiveteam.com>
+ * All Rights Reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="perspective_tab" translate="label" sortOrder="1">
+            <label>Perspective</label>
+        </tab>
+        <section id="weather_widget" sortOrder="10" translate="label" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+            <label>Weather Recommendation Widget Config</label>
+            <tab>perspective_tab</tab>
+            <resource>Perspective_WeatherRecommendationWidget::config</resource>
+            <group id="general_settings" sortOrder="10" translate="label" type="text" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                <label>General Settings</label>
+                <field id="enabled" sortOrder="10" translate="label" type="select" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Module enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="products_number" sortOrder="20" translate="label" type="text" showInDefault="1" showInWebsite="1" canRestore="1">
+                    <label>Number of Products to Display</label>
+                    <validate>validate-number validate-zero-or-greater</validate>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+                <field id="data_cache_time" sortOrder="30" translate="label" type="text" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Data caching time (min)</label>
+                    <validate>validate-digits validate-not-negative-number validate-digits-range digits-range-30-10000</validate>
+                    <comment>Please Set value in Minutes. Minimum value is 30</comment>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+                <field id="weather_api_key" sortOrder="40" translate="label" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>API Key (openweathermap)</label>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+                <field id="weather_api_url" sortOrder="50" translate="label" type="text" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>API URL (openweathermap)</label>
+                    <comment>Example: https://api.openweathermap.org/data/2.5/forecast</comment>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+                <field id="geo_api_url" sortOrder="60" translate="label" type="text" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>GEO API URL</label>
+                    <comment>Example: https://ipwho.is/ (Fields set programmatically)</comment>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+            </group>
+            <group id="weather_settings" sortOrder="20" translate="label" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Weather Settings</label>
+                <field id="conditions" translate="label" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Weather conditions</label>
+                    <frontend_model>Perspective\WeatherRecommendations\Block\Adminhtml\Form\Field\DynamicConditionsGrid</frontend_model>
+                    <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
+                </field>
+                <depends>
+                    <field id="weather_widget/general_settings/enabled">1</field>
+                </depends>
+                <comment>Please enter the temperature: 'Weather' can be hot, cold, or something else.
+                    'Temp.From' and 'Temp.To' must be a number in degrees Celsius. That is, the temperature ranges from to.</comment>
+            </group>
+        </section>
+    </system>
+</config>

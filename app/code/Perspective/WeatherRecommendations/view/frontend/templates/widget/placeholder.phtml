@@ -1,0 +1,16 @@
+<?php
+/** @var RecommendationProducts $block
+ * @var Escaper $escaper
+ */
+
+use Perspective\WeatherRecommendations\Block\Widget\RecommendationProducts;
+use Magento\Framework\Escaper;
+
+?>
+<div id="widget-container"
+     data-mage-init='{"weatherWidgetLoader": {
+     "url": "<?= $escaper->escapeUrl($block->getUrl('perspective/ajax/getweather'))?>"
+      }}'
+>
+    <p>Loading...</p>
+</div>

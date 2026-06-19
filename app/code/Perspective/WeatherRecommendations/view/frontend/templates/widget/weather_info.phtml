@@ -1,0 +1,33 @@
+<?php
+/** @var RecommendationProducts $block
+ * @var Escaper $escaper
+ * @var WeatherViewModel $viewModel
+ */
+
+use Perspective\WeatherRecommendations\Block\Widget\RecommendationProducts;
+use Magento\Framework\Escaper;
+use Perspective\WeatherRecommendations\ViewModel\WeatherViewModel;
+
+$viewModel = $block->getData('view_model');
+?>
+
+<?php if ($viewModel && $viewModel->isWidgetVisible() && count($viewModel->getProducts()) ): ?>
+    <div class="weather-recommendations">
+        <h3 class="weather-title">
+            <?= $escaper->escapeHtml($viewModel->getTitle()) ?>
+        </h3>
+        <div class="products-grid">
+            <?php foreach ($viewModel->getProducts() as $product): ?>
+                <div class="product-item">
+                    <a href="<?= $escaper->escapeUrl($viewModel->getProductUrl($product)) ?>" class="product photo product-item-photo">
+                        <img src="<?= $escaper->escapeUrl($viewModel->getImage($product,'product_base_image')->getUrl()) ?>"
+                             alt="<?= $escaper->escapeHtml($product->getName())?>"/>
+                        <div class="name"><?= $escaper->escapeHtml($product->getName())?></div>
+                        <div class="price"><?= $viewModel->getProductPrice($product) ?></div>
+                    </a>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    </div>
+<?php endif; ?>
+

@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Viktoriia Sira <viktoriia.s@perspectiveteam.com>
+ * All Rights Reserved.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="content">
+            <block name="perspective.weather.recommendations"
+                   class="Perspective\WeatherRecommendations\Block\Widget\RecommendationProducts"
+                   template="Perspective_WeatherRecommendations::widget/placeholder.phtml" >
+                <arguments>
+                    <argument name="view_model"
+                              xsi:type="object">Perspective\WeatherRecommendations\ViewModel\WeatherViewModel
+                    </argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+    </body>
+</page>
