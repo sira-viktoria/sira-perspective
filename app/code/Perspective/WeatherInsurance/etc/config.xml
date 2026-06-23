@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Viktoriia Sira <viktoriia.s@perspectiveteam.com>
+ * All Rights Reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <weather_insurance>
+            <general_settings>
+                <enabled>0</enabled>
+                <base_insurance_price>1000</base_insurance_price>
+                <label_text>Add delivery insurance</label_text>
+                <description>Insurance depends on weather.</description>
+                <weather_conditions>Cold</weather_conditions>
+            </general_settings>
+        </weather_insurance>
+    </default>
+</config>

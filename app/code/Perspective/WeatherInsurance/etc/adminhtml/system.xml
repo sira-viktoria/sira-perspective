@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Viktoriia Sira <viktoriia.s@perspectiveteam.com>
+ * All Rights Reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="perspective_tab" translate="label" sortOrder="1">
+            <label>Perspective</label>
+        </tab>
+        <section id="weather_insurance" sortOrder="10" translate="label" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+            <label>Weather Insurance Configs</label>
+            <tab>perspective_tab</tab>
+            <resource>Perspective_WeatherInsurance::configs</resource>
+            <group id="general_settings" sortOrder="10" translate="label" type="text" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                <label>General Settings</label>
+                <field id="enabled" sortOrder="10" translate="label" type="select" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="base_insurance_price" sortOrder="20" translate="label" type="text" showInDefault="1" showInWebsite="1" canRestore="1">
+                    <label>Insurance Price</label>
+                    <validate>validate-number validate-zero-or-greater</validate>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+                <field id="label_text" sortOrder="30" translate="label" type="text" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Label Text</label>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+                <field id="description" sortOrder="40" translate="label" type="text" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Description</label>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+                <field id="weather_conditions" sortOrder="50" translate="label" type="multiselect" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Weather conditions</label>
+                    <source_model>Perspective\WeatherInsurance\Model\Config\Source\WeatherOptions</source_model>
+                    <comment model="Perspective\WeatherInsurance\Model\Config\LinkToWeatherConfig"/>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

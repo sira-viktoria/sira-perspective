@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Viktoriia Sira <viktoriia.s@perspectiveteam.com>
+ * All Rights Reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Sales:etc/sales.xsd">
+    <section name="quote">
+        <group name="totals">
+            <item name="perspective_weather_insurance_total"
+                  instance="Perspective\WeatherInsurance\Model\Totals\Insurance"
+                  sort_order="10"/>
+        </group>
+    </section>
+</config>

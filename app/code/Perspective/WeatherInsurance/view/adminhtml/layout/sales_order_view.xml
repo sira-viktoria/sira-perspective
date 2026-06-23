@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Viktoriia Sira <viktoriia.s@perspectiveteam.com>
+ * All Rights Reserved.
+ */
+-->
+<page xmlns:xsi="http://w3.org" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="order_totals">
+            <block class="Perspective\WeatherInsurance\Block\Adminhtml\Order\Totals\WeatherInsurance"
+                   name="perspective_weather_insurance_total" />
+        </referenceBlock>
+    </body>
+</page>

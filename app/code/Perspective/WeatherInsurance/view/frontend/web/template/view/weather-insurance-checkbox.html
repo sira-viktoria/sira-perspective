@@ -1,0 +1,19 @@
+<!--
+/**
+ * Viktoriia Sira <viktoriia.s@perspectiveteam.com>
+ * All Rights Reserved.
+ */
+-->
+<!-- ko if: isVisible -->
+<div class="checkbox">
+    <label>
+        <input type="checkbox" data-bind="checked: isChecked">
+        <span data-bind="text: checkboxLabelText"></span>
+    </label>
+    <!-- ko if: isVisible -->
+    <div data-bind="text: checkboxDescriptionText"></div>
+    <div>Current temperature:  <span style="color: red" data-bind="text: temperature + '°C'"></span></div>
+    <!-- /ko -->
+</div>
+<!-- /ko -->
+
