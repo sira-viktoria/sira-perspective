@@ -1,0 +1,7 @@
+<theme xmlns:xsi="http://w3.org" xsi:noNamespaceSchemaLocation="urn:magento:framework:Config/etc/theme.xsd">
+    <title>Hyva Perspective Theme</title>
+    <parent>Hyva/default</parent>
+    <media>
+        <preview_image>media/preview.jpg</preview_image>
+    </media>
+</theme>

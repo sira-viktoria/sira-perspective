@@ -19,6 +19,8 @@
     "version": "2.4.9",
     "require": {
         "dvdoug/boxpacker": "^4.1",
+        "hyva-themes/magento2-default-theme": "^1.4",
+        "hyva-themes/magento2-luma-checkout": "^1.1",
         "magento/composer": "^1.10.1-beta1",
         "magento/composer-dependency-version-audit-plugin": "~0.1",
         "magento/composer-root-update-plugin": "^2.0.4",
@@ -77,6 +79,11 @@
     "minimum-stability": "stable",
     "prefer-stable": true,
     "repositories": [
+        {
+            "name": "private-packagist",
+            "type": "composer",
+            "url": "https://hyva-themes.repo.packagist.com/hoffman-local-7pogmk/"
+        },
         {
             "type": "composer",
             "url": "https://repo.magento.com/"
