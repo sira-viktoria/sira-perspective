@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <!-- Logger Handler -->
+    <virtualType name="Perspective\ErpImport\Logger\Handler\ProductImportHandlerVirtual"
+                 type="Perspective\ErpImport\Logger\Handler\ProductImportHandler">
+        <arguments>
+            <argument name="filesystem" xsi:type="object">Magento\Framework\Filesystem\Driver\File</argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Logger -->
+    <virtualType name="Perspective\ErpImport\Logger\ProductImportLoggerVirtual"
+                 type="Perspective\ErpImport\Logger\ProductImportLogger">
+        <arguments>
+            <argument name="name" xsi:type="string">product_import_logger</argument>
+            <argument name="handlers" xsi:type="array">
+                <item name="product_import_handler" xsi:type="object">Perspective\ErpImport\Logger\Handler\ProductImportHandlerVirtual</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Connect custom logger to class-->
+    <type name="Perspective\ErpImport\Cron\ImportProducts">
+        <arguments>
+            <argument name="logger" xsi:type="object">Perspective\ErpImport\Logger\ProductImportLoggerVirtual</argument>
+        </arguments>
+    </type>
+</config>

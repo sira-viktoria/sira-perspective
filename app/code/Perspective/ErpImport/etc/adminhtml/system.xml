@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="perspective_tab" translate="label" sortOrder="1">
+            <label>Perspective</label>
+        </tab>
+
+        <section id="erp_import" sortOrder="111" translate="label" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Erp Import Config</label>
+            <tab>perspective_tab</tab>
+            <resource>Perspective_ErpImport::config</resource> <!-- -->
+
+            <group id="admin_settings" sortOrder="1" translate="label" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+                <attribute type="expanded">1</attribute>
+                <label>Admin Settings</label>
+
+                <field id="nickname" sortOrder="1" translate="label" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>nickname</label>
+                </field>
+
+                <field id="password" sortOrder="1" translate="label" type="obscure" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>password</label>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>
