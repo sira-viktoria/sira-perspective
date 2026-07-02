@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="product.info.details">
+            <block name="perspective.product.extra.info"
+                   template="Perspective_ProductExtraInfo::product/extra-info.phtml"
+                   group="detailed_info"
+                   after="-">
+                <arguments>
+                    <argument name="title_template" xsi:type="string">Perspective_ProductExtraInfo::product/extra-info-title.phtml</argument>
+                    <argument name="view_model" xsi:type="object">Perspective\ProductExtraInfo\ViewModel\ProductExtraInfo</argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+    </body>
+</page>

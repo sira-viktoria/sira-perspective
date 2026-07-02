@@ -1,0 +1,38 @@
+<?php
+/** @var ProductExtraInfo $extraInfoViewModel */
+/** @var Template $block */
+use Perspective\ProductExtraInfo\ViewModel\ProductExtraInfo;
+use Magento\Framework\View\Element\Template;
+
+$extraInfoViewModel = $block->getData('view_model');
+?>
+
+<?php if ($extraInfoViewModel): ?>
+    <?php
+    $categoryList = $extraInfoViewModel->getCategoryNames();
+    $minPrice = $extraInfoViewModel->getFormattedMinPrice();
+    $isConfigurable = $extraInfoViewModel->isConfigurable();
+    ?>
+    <!-- Categories -->
+    <div x-data='{ categoryList: <?= json_encode($categoryList) ?> }'>
+        <strong class="text-lg">Categories</strong>
+        <ul class="ml-4 text-base list-disc">
+            <template x-for="category in categoryList">
+                <li x-text="category"></li>
+            </template>
+        </ul>
+    </div>
+
+    <!-- Min Simple Price (For configurable) -->
+    <div x-data='{
+        show: <?= $isConfigurable ?>,
+        minPrice: <?= json_encode($minPrice) ?>
+    }' class="mt-4">
+        <template x-if="show">
+            <div class="text-lg">
+                <strong >Min base simple price:</strong> <span x-text="minPrice"></span>
+            </div>
+        </template>
+    </div>
+<?php endif; ?>
+
