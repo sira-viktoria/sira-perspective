@@ -1,0 +1,42 @@
+<?php
+/** @var CategoryAnalytics $extraInfoViewModel */
+/** @var Template $block
+ * @var Escaper $escaper */
+
+use Magento\Framework\Escaper;
+use Magento\Framework\View\Element\Template;
+use Perspective\CategoryAnalytics\ViewModel\CategoryAnalytics;
+
+$analyticsViewModel = $block->getData('view_model');
+?>
+
+<?php if ($analyticsViewModel): ?>
+    <h2 class="mb-6 text-2xl text-center md:text-left">
+        <?= $escaper->escapeHtml(__('Analytics Info')) ?>
+    </h2>
+    <?php
+    $data = $analyticsViewModel->getCategoryAnalyticsData();
+    ?>
+
+    <div class="card p-4">
+        <!-- Component Title -->
+        <table class="w-full">
+            <thead>
+            <tr>
+                <th class="text-center px-4 py-2 "><?= $escaper->escapeHtml(__('Total Products')) ?></th>
+                <th class="text-center px-4 py-2 "><?= $escaper->escapeHtml( __('Average Price')) ?></th>
+                <th class="text-center px-4 py-2"><?=  $escaper->escapeHtml(__('Products In stock')) ?></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td class="text-center px-4 py-2 "><?= $escaper->escapeHtml($data['total_count']) ?></td>
+                <td class="text-center px-4 py-2 "><?=  $escaper->escapeHtml($data['average_price']) ?></td>
+                <td class="text-center px-4 py-2"><?=  $escaper->escapeHtml($data['in_stock_count']) ?></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+<?php endif; ?>
+
