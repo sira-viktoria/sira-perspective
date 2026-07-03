@@ -1,0 +1,12 @@
+type CustomerProductInfo {
+    customerIsLoggedIn: Boolean
+    hasPurchased: Boolean
+    lastPurchaseDate: String
+    ordersCount: Int
+    customerGroup: String
+    customText: String
+}
+
+type Query {
+    customerProductInfo(productId: Int!): CustomerProductInfo @resolver(class: "Perspective\\CustomerProductInfoGraphQl\\Model\\Resolver\\CustomerProductInfo")
+}

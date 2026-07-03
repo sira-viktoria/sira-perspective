@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="customer.wishlist.items">
+            <block class="Magento\Wishlist\Block\Customer\Wishlist\Item\Column"
+                   name="perspective.customer.wishlist.item.purchased.status"
+                   template="Perspective_CustomerProductInfoGraphQl::wishlist-ordered-status.phtml"
+                   after="customer.wishlist.item.inner" />
+        </referenceBlock>
+    </body>
+</page>

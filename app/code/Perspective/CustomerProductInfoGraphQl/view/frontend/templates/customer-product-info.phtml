@@ -1,0 +1,98 @@
+<?php
+use Magento\Framework\Escaper;
+use Hyva\Theme\Model\ViewModelRegistry;
+use Hyva\Theme\ViewModel\ProductPage;
+
+/**
+ * @var ProductPage $productViewModel
+ * @var ViewModelRegistry $viewModels
+ * @var Escaper $escaper
+ */
+$productViewModel = $viewModels->require(ProductPage::class);
+
+$productId = (int)$productViewModel->getProduct()->getId();
+?>
+<div
+    x-data="customerProductInfo(<?= $productId ?>)"
+    x-init="load()"
+>
+    <template x-if="loaded && data.customerIsLoggedIn">
+        <div class="p-4 border rounded bg-gray-50 shadow-sm">
+
+            <template x-if="data.hasPurchased">
+                <p class="text-green-600 font-semibold">
+                    <?= $escaper->escapeHtml(__('You have ordered this product before')) ?>
+                </p>
+            </template>
+
+            <template x-if="!data.hasPurchased">
+                <p class="text-gray-600">
+                    <?= $escaper->escapeHtml(__('You have not ordered this product yet')) ?>
+                </p>
+            </template>
+
+            <div class="mt-2 text-sm space-y-1">
+                <p x-show="data.lastPurchaseDate">
+                    <?= $escaper->escapeHtml(__('Last order date:')) ?>
+                    <span x-text="data.lastPurchaseDate"></span>
+                </p>
+
+                <p x-show="data.hasPurchased">
+                    <?= $escaper->escapeHtml(__('Orders count:')) ?>
+                    <span x-text="data.ordersCount"></span>
+                </p>
+
+                <p>
+                    <?= $escaper->escapeHtml(__('Customer group:')) ?>
+                    <span x-text="data.customerGroup"></span>
+                </p>
+
+                <template x-if="!data.hasPurchased">
+                    <p x-show="data.customText" class="text-gray-600" x-text="data.customText"></p>
+                    <p class="text-gray-600">
+                    </p>
+                </template>
+            </div>
+        </div>
+    </template>
+</div>
+
+<script>
+    function customerProductInfo(productId) {
+        return {
+            loaded: false,
+            data: {},
+
+            async load() {
+                let response = await fetch('/graphql', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    credentials: 'include',
+                    body: JSON.stringify({
+                        query: `
+                        query ($productId: Int!) {
+                          customerProductInfo(productId: $productId) {
+                            customerIsLoggedIn
+                            hasPurchased
+                            lastPurchaseDate
+                            ordersCount
+                            customerGroup
+                            customText
+                          }
+                        }
+                    `,
+                        variables: {
+                            productId: productId
+                        }
+                    })
+                });
+
+                let result = await response.json();
+                this.data = result.data?.customerProductInfo ?? {};
+                this.loaded = true;
+            }
+        }
+    }
+</script>

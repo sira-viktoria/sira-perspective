@@ -1,0 +1,74 @@
+<?php
+/**
+ * @var Column $block
+ * @var Escaper $escaper
+ */
+use Magento\Framework\Escaper;
+use Magento\Wishlist\Block\Customer\Wishlist\Item\Column;
+
+$item = $block->getItem();
+$productId = (int)$item->getProduct()->getId();
+?>
+
+<div x-data="customerProductInfo(<?= $productId ?>)" x-init="load()">
+    <template x-if="loaded && data.customerIsLoggedIn">
+        <div class="p-4 space-y-2 text-sm">
+            <template x-if="data.hasPurchased">
+                <p class="text-green-600 font-medium">
+                    <?= $escaper->escapeHtml(__('You have ordered this product before')) ?>
+                </p>
+            </template>
+
+            <template x-if="!data.hasPurchased">
+                <p class="text-gray-600">
+                    <?= $escaper->escapeHtml(__('You have not ordered this product yet')) ?>
+                </p>
+            </template>
+
+            <div class="text-gray-700">
+                <p x-show="data.lastPurchaseDate">
+                    <?= $escaper->escapeHtml(__('Last order date:')) ?>
+                    <span x-text="data.lastPurchaseDate"></span>
+                </p>
+            </div>
+        </div>
+    </template>
+</div>
+
+
+<script>
+    function customerProductInfo(productId) {
+        return {
+            loaded: false,
+            data: {},
+
+            async load() {
+                let response = await fetch('/graphql', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    credentials: 'include',
+                    body: JSON.stringify({
+                        query: `
+                        query ($productId: Int!) {
+                          customerProductInfo(productId: $productId) {
+                            customerIsLoggedIn
+                            hasPurchased
+                            lastPurchaseDate
+                          }
+                        }
+                    `,
+                        variables: {
+                            productId: productId
+                        }
+                    })
+                });
+
+                let result = await response.json();
+                this.data = result.data?.customerProductInfo ?? {};
+                this.loaded = true;
+            }
+        }
+    }
+</script>
