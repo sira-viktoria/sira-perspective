@@ -1,0 +1,18 @@
+{
+    "perspective_popular_products": {
+        "column": {
+            "id": true,
+            "rank": true,
+            "product_id": true,
+            "orders_count": true,
+            "updated_at": true
+        },
+        "index": {
+            "PERSPECTIVE_POPULAR_PRODUCTS_PRODUCT_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "PERSPECTIVE_POPULAR_PRDS_PRD_ID_CAT_PRD_ENTT_ENTT_ID": true
+        }
+    }
+}

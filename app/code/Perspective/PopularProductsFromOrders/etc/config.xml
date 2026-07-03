@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Config/etc/config.xsd">
+    <default>
+        <perspective_popular_products>
+            <general_settings>
+                <enabled>0</enabled>
+                <update_frequency>0 */6 * * *</update_frequency>
+                <display_count>4</display_count>
+            </general_settings>
+        </perspective_popular_products>
+    </default>
+</config>

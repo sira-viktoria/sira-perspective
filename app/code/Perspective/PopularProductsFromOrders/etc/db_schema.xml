@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="perspective_popular_products" resource="default" engine="innodb"  comment="Popular products From Orders">
+        <column xsi:type="int" name="id" unsigned="true" nullable="false" identity="true" comment="ID"/>
+        <column xsi:type="smallint" name="rank" unsigned="true" nullable="false" comment="Rank Position"/>
+        <column xsi:type="int" name="product_id" padding="10" unsigned="true" nullable="false" comment="Product ID"/>
+        <column xsi:type="int" name="orders_count" unsigned="true" nullable="false" default="0" comment="Orders with product"/>
+        <column xsi:type="timestamp" name="updated_at" on_update="true" default="CURRENT_TIMESTAMP" comment="Updated At"/>
+
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+
+        <constraint xsi:type="foreign" referenceId="PERSPECTIVE_POPULAR_PRODUCTS_PRODUCT_ID_CATALOG_PRODUCT_ENTITY_ENTITY_ID"
+                    table="perspective_popular_products" column="product_id"
+                    referenceTable="catalog_product_entity" referenceColumn="entity_id" onDelete="CASCADE"/>
+
+        <index referenceId="PERSPECTIVE_POPULAR_PRODUCTS_PRODUCT_ID" indexType="btree">
+            <column name="product_id"/>
+        </index>
+    </table>
+</schema>

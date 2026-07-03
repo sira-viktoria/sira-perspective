@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
+    <group id="default">
+        <job name="perspective_popular_products_refresh"
+             instance="Perspective\PopularProductsFromOrders\Cron\RefreshPopularProducts" method="execute">
+            <config_path>perspective_popular_products/general_settings/update_frequency</config_path>
+        </job>
+    </group>
+</config>

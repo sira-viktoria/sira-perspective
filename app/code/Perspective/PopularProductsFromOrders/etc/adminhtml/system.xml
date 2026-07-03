@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="perspective_tab" translate="label" sortOrder="1">
+            <label>Perspective</label>
+        </tab>
+        <section id="perspective_popular_products" sortOrder="100" translate="label" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Popular Products Configs</label>
+            <tab>perspective_tab</tab>
+            <resource>Perspective_PopularProductsFromOrders::configs</resource>
+            <group id="general_settings" sortOrder="10" translate="label" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General Settings</label>
+                <field id="enabled" sortOrder="1" translate="label" type="select" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Module enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+
+                <field id="update_frequency" sortOrder="20" translate="label" type="text" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Update Frequency (cron time)</label>
+                    <validate>required-entry validate-cron</validate>
+                    <comment><![CDATA[Format: <code>minute hour day month day_of_week</code>. Example: <code>0 */6 * * *</code> (every 6 hours).]]></comment>
+                    <depends><field id="enabled">1</field></depends>
+                </field>
+
+                <field id="display_count" sortOrder="30" translate="label" type="text" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Products Count</label>
+                    <validate>validate-digits validate-not-negative-number validate-digits-range</validate>
+                    <comment>Number of products in the block. Must be greater than 0.</comment>
+                    <depends><field id="enabled">1</field></depends>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>
