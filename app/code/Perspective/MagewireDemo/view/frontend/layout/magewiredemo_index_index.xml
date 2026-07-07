@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://w3.org" layout="1column"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_layout.xsd">
+    <update handle="hyva_form_validation"/>
+    <body>
+        <referenceContainer name="content">
+            <block class="Magento\Framework\View\Element\Template" name="customer.profile.editor"
+                   template="Perspective_MagewireDemo::magewire/customer-profile-editor.phtml">
+                <arguments>
+                    <argument name="magewire" xsi:type="object">
+                        \Perspective\MagewireDemo\Magewire\CustomerProfileEditor
+                    </argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

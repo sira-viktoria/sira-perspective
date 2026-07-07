@@ -1,0 +1,132 @@
+<?php
+/** @var Template $block */
+/** @var CustomerProfileEditor $magewire */
+/** @var Escaper $escaper */
+use Magento\Framework\Escaper;
+use Magento\Framework\View\Element\Template;
+use Perspective\MagewireDemo\Magewire\CustomerProfileEditor;
+?>
+
+<div class="max-w-xl mx-auto mt-10 p-6 bg-white rounded-lg shadow-md space-y-8"
+     x-data="{ showSuccess: false, successMessage: '' }"
+     @profile-updated.window="showSuccess = true; successMessage = $event.detail.message"
+     @profile-reset.window="showSuccess = false; successMessage = ''">
+
+    <div>
+        <h2 class="text-2xl font-bold mb-6 text-gray-800"><?= $escaper->escapeHtmlAttr(__('Customer Profiler')) ?></h2>
+        <form  x-data="hyva.formValidation($el)" novalidate>
+            <div class="field field-reserved">
+                <label for="firstname" class="block text-sm font-medium text-gray-700"><?= $escaper->escapeHtmlAttr('First Name') ?></label>
+                <input id="firstname" type="text"
+                       wire:model.live="firstname"
+                       data-magewire-is-valid="<?php (int) !$magewire->hasError('firstname') ?>"
+                       class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-2 border"
+                    <?php if ($magewire->hasError('firstname')): ?>
+                        aria-invalid="true" aria-errormessage="firstname-error"
+                    <?php endif ?>
+                    <?php if ($magewire->hasError('firstname')): ?>
+                        data-msg-magewire="<?php $escaper->escapeHtmlAttr($magewire->getError('firstname')) ?>"
+                    <?php endif; ?>>
+
+                <?php if ($magewire->hasError('firstname')): ?>
+                    <span class="text-red-600" id="firstname-error">
+                        <?= $escaper->escapeHtml($magewire->getError('firstname')) ?>
+                    </span>
+                <?php endif ?>
+            </div>
+
+            <div class="field field-reserved">
+                <label for="lastname" class="block text-sm font-medium text-gray-700"><?= $escaper->escapeHtmlAttr('Last Name') ?></label>
+                <input id="lastname" type="text"
+                    wire:model.live="lastname"
+                    data-magewire-is-valid="<?php (int) !$magewire->hasError('lastname') ?>"
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-2 border"
+                    <?php if ($magewire->hasError('lastname')): ?>
+                        data-msg-magewire="<?php $escaper->escapeHtmlAttr($magewire->getError('lastname')) ?>"
+                    <?php endif; ?> >
+
+                <?php if ($magewire->hasError('lastname')): ?>
+                    <span class="text-red-600" id="lastname-error">
+                        <?= $escaper->escapeHtml($magewire->getError('lastname')) ?>
+                    </span>
+                <?php endif ?>
+            </div>
+
+            <div class="field field-reserved">
+                <label for="telephone" class="block text-sm font-medium text-gray-700"><?= $escaper->escapeHtmlAttr('Phone') ?></label>
+                <input id="telephone" type="tel"
+                       wire:model.live="telephone"
+                       data-validate='{"telephone-ua": true}'
+                       data-magewire-is-valid="<?php (int) !$magewire->hasError('telephone') ?>"
+                       class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-2 border"
+                    <?php if ($magewire->hasError('telephone')): ?>
+                        data-msg-magewire="<?php $escaper->escapeHtmlAttr($magewire->getError('telephone')) ?>"
+                    <?php endif; ?> >
+
+                <?php if ($magewire->hasError('telephone')): ?>
+                    <span class="text-red-600" id="telephone-error">
+                        <?= $escaper->escapeHtml($magewire->getError('telephone')) ?>
+                    </span>
+                <?php endif ?>
+            </div>
+
+            <div class="flex justify-end space-x-3 pt-2">
+                <button type="button" wire:click="resetProfile" class="btn btn-secondary inline-block">
+                    <?= $escaper->escapeHtmlAttr('Reset') ?>
+                </button>
+
+                <button type="button"  class="btn btn-primary inline-block" @click="validate().then(() => $wire.saveProfile()).catch(() => {})">
+                    <?= $escaper->escapeHtmlAttr('Save') ?>
+                </button>
+            </div>
+        </form>
+
+        <div x-show="showSuccess"
+             x-transition
+             class="mt-4 p-4 bg-green-100 text-green-700 rounded-md hidden"
+             :class="{'hidden': !showSuccess}"
+             x-text="successMessage">
+        </div>
+    </div>
+
+    <hr class="border-gray-200">
+
+    <div class="bg-gray-50 p-5 rounded-lg border border-gray-200">
+        <h3 class="text-lg font-semibold text-gray-700 mb-3 border-b pb-2"><?= $escaper->escapeHtmlAttr('Profile Review') ?></h3>
+
+        <div class="space-y-2 text-sm text-gray-600">
+            <div>
+                <span class="font-medium text-gray-900"> <?= $escaper->escapeHtmlAttr('First Name: ') ?></span>
+                <span class="ml-1"><?= $escaper->escapeHtml($magewire->firstname) ?: '' ?></span>
+            </div>
+            <div>
+                <span class="font-medium text-gray-900"> <?= $escaper->escapeHtmlAttr('Last Name: ') ?></span>
+                <span class="ml-1"><?= $escaper->escapeHtml($magewire->lastname) ?: '' ?></span>
+            </div>
+            <div>
+                <span class="font-medium text-gray-900"> <?= $escaper->escapeHtmlAttr('Phone:') ?></span>
+                <span class="ml-1"><?= $escaper->escapeHtml($magewire->telephone) ?: '' ?></span>
+            </div>
+        </div>
+    </div>
+    <?php if ($magewire->componentInitialized): ?>
+        <div style="color: green; margin-top: 10px;">
+            <span><?= $escaper->escapeHtmlAttr('Component initialized') ?></span>
+        </div>
+    <?php endif ?>
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            if (window.hyva && window.hyva.formValidation) {
+
+                hyva.formValidation.addRule('telephone-ua', function(value, options, field, context) {
+                    if (!value) {
+                        return true;
+                    }
+                    const isValid = /^\+?380\d{9}$/.test(value);
+
+                    return isValid ? true : 'The phone number must be in the Ukrainian format: +380951212121';
+                });
+            }
+        });
+    </script>
+</div>
