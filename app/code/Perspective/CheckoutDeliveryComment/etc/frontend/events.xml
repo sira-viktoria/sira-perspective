@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="checkout_submit_all_after">
+        <observer name="add_delivery_comment_checkout_history"
+                  instance="Perspective\CheckoutDeliveryComment\Observer\AddDeliveryCommentToHistory"/>
+    </event>
+
+    <event name="sales_model_service_quote_submit_before">
+        <observer name="add_delivery_comment_checkout_order"
+                  instance="Perspective\CheckoutDeliveryComment\Observer\AddDeliveryCommentToOrder"/>
+    </event>
+</config>
