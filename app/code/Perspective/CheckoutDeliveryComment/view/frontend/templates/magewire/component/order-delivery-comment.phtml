@@ -7,12 +7,13 @@ use Magento\Framework\View\Element\Template;
 use Perspective\CheckoutDeliveryComment\Magewire\Checkout\OrderDeliveryComment;
 ?>
 
-<div class="border-t border-gray-400 pt-4">
+<div class="border-t border-gray-400 pt-4" x-data="{ isCommentValid: false }"
+     @checkout:order-delivery-comment:toggle-place-order.window="isCommentValid = $event.detail.disabled">
     <h2 class="text-2xl font-bold mb-6 text-blue-900">
         <?= $escaper->escapeHtmlAttr(__('Additional Information')) ?>
     </h2>
-    <div class="space-x-4 text-sm">
-        <span class="hidden text-purple-700"
+    <div class="text-green-500 space-x-4 text-sm">
+        <span class="hidden"
               wire:loading
               wire:target="orderDeliveryComment"
               wire:loading.class.remove="hidden">
@@ -20,7 +21,7 @@ use Perspective\CheckoutDeliveryComment\Magewire\Checkout\OrderDeliveryComment;
         </span>
 
         <?php if ($magewire->saved): ?>
-            <span wire:target="orderDeliveryComment" class="flex text-primaryGreen" wire:loading.class="hidden">
+            <span wire:target="orderDeliveryComment" class="flex" wire:loading.class="hidden">
                 <?= $escaper->escapeHtml(__('Saved successfully!')) ?>
             </span>
         <?php endif ?>
@@ -31,6 +32,7 @@ use Perspective\CheckoutDeliveryComment\Magewire\Checkout\OrderDeliveryComment;
             id="order_delivery_comment"
             type="text"
             name="order_delivery_comment"
+            data-validate='{"validate-delivery-comment": true}'
             wire:model.live.debounce.750ms="orderDeliveryComment"
             wire:key="order-delivery-comment-key"
             placeholder="<?= $escaper->escapeHtmlAttr(__('Order Delivery Comment')) ?>"
@@ -38,9 +40,45 @@ use Perspective\CheckoutDeliveryComment\Magewire\Checkout\OrderDeliveryComment;
         </textarea>
     </div>
 
-    <?php if ($magewire->isBlockCartButton): ?>
-        <span class="text-red-600" id="order-delivery-comment-error">
-             <?= $escaper->escapeHtml(__('Delivery Comment must not contain the word "test".')) ?>
-        </span>
-    <?php endif ?>
+    <template x-if="isCommentValid">
+        <p class="text-red-600 text-sm mt-1">Delivery Comment must not contain the word "test".</p>
+    </template>
+
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            if (window.hyva && window.hyva.formValidation) {
+                hyva.formValidation.addRule('validate-delivery-comment', function(value, options, field, context) {
+                    if (!value) {
+                        return true;
+                    }
+
+                    return !/test/i.test(value);
+                });
+            }
+
+            window.addEventListener('checkout:order-delivery-comment:toggle-place-order', (event) => {
+                const shouldDisable = event.detail.disabled;
+                const placeOrderButtons = document.querySelectorAll(
+                    'button[id^="place-order"], button.btn-place-order, .payment-method-submit button'
+                );
+
+                placeOrderButtons.forEach(button => {
+                    if (shouldDisable) {
+                        button.setAttribute('disabled', 'disabled');
+                        button.classList.add('opacity-50', 'cursor-not-allowed');
+                        if (!button.dataset.originalText) {
+                            button.dataset.originalText = button.innerText;
+                        }
+                        button.innerText = 'Fix Delivery Comment First';
+                    } else {
+                        button.removeAttribute('disabled');
+                        button.classList.remove('opacity-50', 'cursor-not-allowed');
+                        if (button.dataset.originalText) {
+                            button.innerText = button.dataset.originalText;
+                        }
+                    }
+                });
+            });
+        });
+    </script>
 </div>

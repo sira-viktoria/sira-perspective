@@ -3,9 +3,6 @@ declare(strict_types=1);
 
 namespace Perspective\CheckoutDeliveryComment\Magewire\Checkout;
 
-use Hyva\Checkout\Model\Magewire\Component\EvaluationInterface;
-use Hyva\Checkout\Model\Magewire\Component\EvaluationResultFactory;
-use Hyva\Checkout\Model\Magewire\Component\Evaluation\EvaluationResult;
 use Magento\Checkout\Model\Session as SessionCheckout;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Exception\NoSuchEntityException;
@@ -15,11 +12,10 @@ use Magewirephp\Magewire\Component;
 /**
  * OrderDeliveryComment Magewire.
  */
-class OrderDeliveryComment extends Component implements EvaluationInterface
+class OrderDeliveryComment extends Component
 {
     public string $orderDeliveryComment = '';
     public bool $saved = false;
-    public bool $isBlockCartButton = false;
 
     /**
      * @var SessionCheckout
@@ -32,25 +28,17 @@ class OrderDeliveryComment extends Component implements EvaluationInterface
     protected CartRepositoryInterface $quoteRepository;
 
     /**
-     * @var EvaluationResultFactory
-     */
-    protected EvaluationResultFactory $evaluationResultFactory;
-
-    /**
      * OrderDeliveryComment
      *
      * @param SessionCheckout $checkoutSession
      * @param CartRepositoryInterface $quoteRepository
-     * @param EvaluationResultFactory $evaluationResultFactory
      */
     public function __construct(
         SessionCheckout $checkoutSession,
-        CartRepositoryInterface $quoteRepository,
-        EvaluationResultFactory $evaluationResultFactory
+        CartRepositoryInterface $quoteRepository
     ) {
         $this->checkoutSession = $checkoutSession;
         $this->quoteRepository = $quoteRepository;
-        $this->evaluationResultFactory = $evaluationResultFactory;
     }
 
     /**
@@ -72,6 +60,18 @@ class OrderDeliveryComment extends Component implements EvaluationInterface
      */
     public function updatingOrderDeliveryComment($value): mixed
     {
+        if (preg_match('/' . preg_quote('test', '/') . '/i', $value)) {
+            $this->saved = false;
+            $this->orderDeliveryComment = $value;
+            $this->dispatchBrowserEvent('checkout:order-delivery-comment:toggle-place-order', ['disabled' => true]);
+            throw new LocalizedException(
+                __('Server Check: Delivery Comment must not contain the word "test".')
+            );
+        } else {
+            $this->saved = true;
+            $this->dispatchBrowserEvent('checkout:order-delivery-comment:toggle-place-order', ['disabled' => false]);
+        }
+
         $this->saveOrderDeliveryComment($value);
         return $value;
     }
@@ -85,35 +85,14 @@ class OrderDeliveryComment extends Component implements EvaluationInterface
     private function saveOrderDeliveryComment($value): void
     {
         try {
-            if (preg_match('/' . preg_quote('test', '/') . '/i', $value)) {
-                $this->isBlockCartButton = true;
-                $this->saved = false;
-            } else {
-                $quote = $this->checkoutSession->getQuote();
-                $quote->setData('order_delivery_comment', $value);
-                $this->quoteRepository->save($quote);
-                $this->isBlockCartButton = false;
-                $this->saved = true;
-            }
+            $quote = $this->checkoutSession->getQuote();
+            $quote->setData('order_delivery_comment', $value);
+
+            $this->quoteRepository->save($quote);
+            $this->saved = true;
 
         } catch (\Exception $e) {
             throw new LocalizedException(__('Could not save comment.'));
         }
-    }
-
-    /**
-     * @param EvaluationResultFactory $resultFactory
-     *
-     * @return EvaluationResult
-     */
-    public function evaluateCompletion(EvaluationResultFactory $resultFactory): EvaluationResult
-    {
-        if (preg_match('/' . preg_quote('test', '/') . '/i', (string)$this->orderDeliveryComment)) {
-
-            $this->isBlockCartButton = true;
-            return $resultFactory->createBlocking();
-        }
-
-        return $resultFactory->createSuccess();
     }
 }
