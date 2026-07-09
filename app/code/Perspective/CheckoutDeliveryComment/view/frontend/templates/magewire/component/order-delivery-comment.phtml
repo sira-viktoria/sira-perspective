@@ -6,9 +6,9 @@ use Magento\Framework\Escaper;
 use Magento\Framework\View\Element\Template;
 use Perspective\CheckoutDeliveryComment\Magewire\Checkout\OrderDeliveryComment;
 ?>
-
-<div class="border-t border-gray-400 pt-4" x-data="{ isCommentValid: false }"
-     @checkout:order-delivery-comment:toggle-place-order.window="isCommentValid = $event.detail.disabled">
+<div id="order-delivery-comment-container" class="border-t border-gray-400 pt-4" x-data="{ isCommentValid: false, isVisible: false}"
+     @checkout:order-delivery-comment:toggle-place-order.window="isCommentValid = $event.detail.disabled"
+     x-show="isVisible">
     <h2 class="text-2xl font-bold mb-6 text-blue-900">
         <?= $escaper->escapeHtmlAttr(__('Additional Information')) ?>
     </h2>
@@ -78,6 +78,18 @@ use Perspective\CheckoutDeliveryComment\Magewire\Checkout\OrderDeliveryComment;
                         }
                     }
                 });
+            });
+        });
+
+        window.addEventListener('checkout:init:evaluation', () => {
+            hyvaCheckout.evaluation.registerProcessor('orderDeliveryComment', (component, el, result) => {
+                const blockComment = document.getElementById('order-delivery-comment-container');
+
+                if (blockComment) {
+                    const alpineData = Alpine.$data(blockComment);
+                    alpineData.isVisible = !!result.arguments.details.showComment;
+                }
+                return result.result;
             });
         });
     </script>
