@@ -5,6 +5,5 @@
     <body>
         <move element="checkout.comment.section" destination="column.center" />
         <referenceBlock name="checkout.comment-quote-summary" remove="true" />
-
     </body>
 </page>

@@ -6,7 +6,9 @@ use Magento\Framework\Escaper;
 use Magento\Framework\View\Element\Template;
 use Perspective\CheckoutDeliveryComment\Magewire\Checkout\OrderDeliveryComment;
 ?>
-<div id="order-delivery-comment-container" class="border-t border-gray-400 pt-4" x-data="{ isCommentValid: false, isVisible: false}"
+
+<div id="order-delivery-comment-container" class="border-t border-gray-400 pt-4"
+     x-data="{ isCommentValid: false, isVisible: true}"
      @checkout:order-delivery-comment:toggle-place-order.window="isCommentValid = $event.detail.disabled"
      x-show="isVisible">
     <div class="text-green-500 space-x-4 text-sm">
