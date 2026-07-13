@@ -85,7 +85,7 @@ class RestrictShippingMethodsByCustomerGroup
                 if ($carrierCode == self::FREE_SHIPPING_CODE) {
                     unset($result[$carrierCode]);
                 }
-                if ($carrierCode !== $allowedShippingForTrade && $qtyOfProducts > $qtyOfProductsForTrade) {
+                if ($carrierCode !== $allowedShippingForTrade && $qtyOfProducts >= $qtyOfProductsForTrade) {
                     unset($result[$carrierCode]);
                 }
             }

@@ -85,7 +85,7 @@ class RestrictPaymentMethodsByCustomerGroup
             $allowedPaymentMethodForTrade = $this->myPayConfig->getAllowedPaymentForTrade();
 
             foreach ($result as $key => $method) {
-                if ($method->getCode() !== $allowedPaymentMethodForTrade && $qtyOfProducts > $qtyOfProductsForTrade) {
+                if ($method->getCode() !== $allowedPaymentMethodForTrade && $qtyOfProducts >= $qtyOfProductsForTrade) {
                     unset($result[$key]);
                 }
             }
