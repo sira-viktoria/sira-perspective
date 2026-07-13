@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="hyva.checkout.components">
+            <container name="checkout.comment.section" htmlTag="fieldset" htmlId="comment" before="-">
+                <block name="comment.title" template="Hyva_Checkout::section/title.phtml">
+                    <arguments>
+                        <argument name="html_tag" xsi:type="string">legend</argument>
+                    </arguments>
+                    <action method="setTitle">
+                        <argument name="title" translate="true" xsi:type="string">Additional information</argument>
+                    </action>
+                </block>
+                <block name="checkout.default.comment"  as="comment" before="-"
+                       template="Perspective_CheckoutDeliveryComment::magewire/component/order-delivery-comment.phtml">
+                    <arguments>
+                        <argument name="magewire" xsi:type="object">
+                            Perspective\CheckoutDeliveryComment\Magewire\Checkout\OrderDeliveryComment
+                        </argument>
+                    </arguments>
+                </block>
+            </container>
+        </referenceBlock>
+        <referenceContainer name="checkout.quote-summary.section">
+            <block name="checkout.comment-quote-summary"
+                   template="Perspective_CheckoutDeliveryComment::checkout/order-comment.phtml"
+                   after="-"/>
+        </referenceContainer>
+
+        <move element="checkout.comment-quote-summary" destination="column.right" after="-"/>
+    </body>
+</page>
