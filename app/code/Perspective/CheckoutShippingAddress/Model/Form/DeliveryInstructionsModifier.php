@@ -6,6 +6,7 @@ namespace Perspective\CheckoutShippingAddress\Model\Form;
 use Hyva\Checkout\Model\Form\EntityFormInterface;
 use Hyva\Checkout\Model\Form\EntityFormModifierInterface;
 use Magento\Checkout\Model\Session as CheckoutSession;
+use Magento\Customer\Model\Session as CustomerSession;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Quote\Api\CartRepositoryInterface;
@@ -26,17 +27,25 @@ class DeliveryInstructionsModifier implements EntityFormModifierInterface
     protected CartRepositoryInterface $quoteRepository;
 
     /**
+     * @var CustomerSession
+     */
+    protected CustomerSession $customerSession;
+
+    /**
      * DeliveryInstructionsModifier constructor.
      *
      * @param CheckoutSession $checkoutSession
      * @param CartRepositoryInterface $quoteRepository
+     * @param CustomerSession $customerSession
      */
     public function __construct(
         CheckoutSession $checkoutSession,
-        CartRepositoryInterface $quoteRepository
+        CartRepositoryInterface $quoteRepository,
+        CustomerSession $customerSession
     ) {
         $this->checkoutSession = $checkoutSession;
         $this->quoteRepository = $quoteRepository;
+        $this->customerSession = $customerSession;
     }
 
     /**
@@ -45,6 +54,12 @@ class DeliveryInstructionsModifier implements EntityFormModifierInterface
      */
     public function apply(EntityFormInterface $form): EntityFormInterface
     {
+        $form->registerModificationListener(
+            'company_field_init',
+            'form:init',
+            [$this, 'removeCompanyField']
+        );
+
         $form->registerModificationListener(
             'delivery_instructions_init',
             'form:init',
@@ -99,6 +114,21 @@ class DeliveryInstructionsModifier implements EntityFormModifierInterface
         if ($quote) {
             $quote->setData('delivery_instructions', $value);
             $this->quoteRepository->save($quote);
+        }
+    }
+
+    /**
+     * @param EntityFormInterface $form
+     * @return void
+     */
+    public function removeCompanyField(EntityFormInterface $form): void
+    {
+        $companyField = $form->hasField('company')
+            ? $form->getField('company')
+            : null;
+
+        if ($companyField && !$this->customerSession->isLoggedIn()) {
+            $companyField->setVisible(false);
         }
     }
 }
