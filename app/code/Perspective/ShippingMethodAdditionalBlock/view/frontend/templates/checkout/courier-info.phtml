@@ -1,0 +1,14 @@
+<?php
+/** @var Template $block */
+/** @var Escaper $escaper */
+use Magento\Framework\Escaper;
+use Magento\Framework\View\Element\Template;
+?>
+<div x-data="" x-show="$wire.isVisible" x-cloak class="p-4 bg-blue-50 border border-blue-200 rounded">
+    <h2 x-text="$wire.shippingCourierNotice" style="font-size: larger"></h2>
+    <p x-text="$wire.shippingCourierDescription"></p>
+</div>
+
+
+
+

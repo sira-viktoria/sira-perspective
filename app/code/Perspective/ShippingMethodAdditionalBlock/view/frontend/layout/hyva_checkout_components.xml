@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="checkout.shipping.methods.after">
+            <block name="checkout.shipping.method.courier-info"
+                   template="Perspective_ShippingMethodAdditionalBlock::checkout/courier-info.phtml">
+                <arguments>
+                    <argument name="magewire" xsi:type="object">
+                        Perspective\ShippingMethodAdditionalBlock\Magewire\CourierInfoBlock
+                    </argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+    </body>
+
+</page>
