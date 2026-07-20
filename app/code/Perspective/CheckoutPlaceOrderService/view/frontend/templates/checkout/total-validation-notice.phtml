@@ -1,0 +1,39 @@
+<?php
+use Magento\Framework\Escaper;
+use Magento\Framework\View\Element\Template;
+use Hyva\Theme\ViewModel\HyvaCsp;
+
+/** @var Template $block */
+/** @var Escaper $escaper */
+/** @var HyvaCsp $hyvaCsp */
+?>
+
+
+<div id="order-grand-total-validation-container" x-data="{}" x-show="$wire.isVisibleErrorNotice" x-cloak class="w-full my-4">
+    <div class="p-4 bg-red-50 border border-red-200 rounded text-red-700 font-bold flex items-center gap-2 shadow-sm"
+         x-data="{minAmount: $wire.minOrderAmount,
+         get minOrderMessage() {return `Minimum order amount is ${this.minAmount} UAH. Please add more products to your cart`;}}">
+        <span x-text="minOrderMessage"></span>
+    </div>
+
+    <script>
+        window.addEventListener('checkout:init:evaluation', () => {
+            hyvaCheckout.evaluation.registerProcessor('grandTotalValidation', (component, el, result) => {
+                const placeOrderButtons = document.querySelectorAll(
+                    'button[id^="place-order"], button.btn-place-order, .payment-method-submit button'
+                );
+
+                placeOrderButtons.forEach(button => {
+                    if (result.arguments.details.disabled) {
+                        button.setAttribute('disabled', 'disabled');
+                    } else {
+                        button.removeAttribute('disabled');
+                    }
+                });
+                return result.result;
+            });
+        });
+    </script>
+    <?php $hyvaCsp->registerInlineScript() ?>
+</div>
+
