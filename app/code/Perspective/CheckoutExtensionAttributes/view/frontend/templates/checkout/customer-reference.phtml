@@ -1,0 +1,77 @@
+<?php
+declare(strict_types=1);
+
+use Perspective\CheckoutExtensionAttributes\Magewire\Checkout\CustomerReference;
+use Magento\Framework\Escaper;
+
+/** @var Escaper $escaper */
+/** @var  CustomerReference $magewire */
+
+?>
+<div class="border-t border-slate-300 pt-4">
+    <div x-data="{
+            content: $wire.customerReference ?? '',
+            limit: $el.dataset.limit,
+            get remaining() {
+                return this.limit - this.content.length
+            }
+         }"
+         x-init="$watch('limit')"
+         data-limit="250"
+    >
+        <div class="flex justify-between font-medium">
+            <label class="block text-sm text-slate-700 mb-3" for="customerReference">
+                <?= $escaper->escapeHtml(__('Customer Reference')) ?> (<?= /* @noEscape */ mb_strtolower($escaper->escapeHtml(__('Optional'), 'UTF-8')) ?>)
+            </label>
+
+            <div class="text-green-500 space-x-4 text-sm">
+                <span class="hidden"
+                      wire:loading
+                      wire:target="customerReference"
+                      wire:loading.class.remove="hidden"
+                >
+                    ...<?= $escaper->escapeHtml(__('saving')) ?>
+                </span>
+
+                <?php if ($magewire->saved): ?>
+                    <span wire:target="customerReference" class="flex"
+                          wire:loading.class="hidden"
+                    >
+                        <?= $escaper->escapeHtml(__('saved successfully')) ?>
+                    </span>
+                <?php endif ?>
+            </div>
+        </div>
+
+        <textarea id="customer-reference"
+                  wire:model.delay.750ms="customerReference"
+                  x-ref="content"
+                  x-bind:maxlength="limit"
+                  x-model="content"
+                  type="text"
+                  rows="4"
+                  class="block w-full
+                         shadow-sm
+                         border-gray-300 rounded-md
+                         resize-y"
+        ></textarea>
+
+        <div class="w-full flex flex-row-reverse mt-1 font" x-ref="remaining" x-cloak>
+            <span x-text="(remaining + '/' + limit)"
+                  x-show="remaining < 75 && remaining !== 0"
+                  x-bind:class="{
+                      25: 'text-green-700',
+                      50: 'text-purple-700 font-medium',
+                      75: 'text-yellow-600 font-semibold',
+                      100: 'text-red-600 font-bold'
+                  }[(100 - (Math.round(remaining / 25) * 25))]"
+            ></span>
+
+            <div x-ref="remaining">
+                <p class="text-red-700" x-show="remaining === 0">
+                    <?= $escaper->escapeHtml(__('You\'ve reached the maximum amount of characters')) ?>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

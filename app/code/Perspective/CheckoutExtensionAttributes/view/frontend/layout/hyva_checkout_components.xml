@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+
+    <body>
+        <referenceContainer name="checkout.section.additional-options">
+            <block
+                name="perspective.checkout.customer-reference"
+                after="-"
+                template="Perspective_CheckoutExtensionAttributes::checkout/customer-reference.phtml">
+                <arguments>
+                    <argument
+                        name="magewire"
+                        xsi:type="object">
+                        Perspective\CheckoutExtensionAttributes\Magewire\Checkout\CustomerReference
+                    </argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+    </body>
+</page>
