@@ -7,6 +7,7 @@
         <referenceContainer name="checkout.section.additional-options">
             <block
                 name="perspective.checkout.customer-reference"
+                ifconfig="customer_reference/general_settings/is_visible"
                 after="-"
                 template="Perspective_CheckoutExtensionAttributes::checkout/customer-reference.phtml">
                 <arguments>

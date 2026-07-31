@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <customer_reference>
+            <general_settings>
+                <is_visible>0</is_visible>
+            </general_settings>
+        </customer_reference>
+    </default>
+</config>

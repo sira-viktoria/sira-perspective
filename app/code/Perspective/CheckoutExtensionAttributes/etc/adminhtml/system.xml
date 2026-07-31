@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Viktoriia Sira <viktoriia.s@perspectiveteam.com>
+ * All Rights Reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="customer_reference" sortOrder="200" translate="label" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Customer Reference</label>
+            <tab>perspective_tab</tab>
+            <resource>Perspective_CheckoutExtensionAttributes::configs</resource>
+            <group id="general_settings" sortOrder="10" translate="label" type="text" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                <label>General Settings</label>
+                <field id="is_visible" sortOrder="10" translate="label" type="select" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Is Visible</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>
