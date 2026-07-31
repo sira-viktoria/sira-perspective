@@ -1,0 +1,14 @@
+{
+    "name": "perspective/module-checkout-success-info",
+    "description": "Additional Info On the Success Page",
+    "type": "magento2-module",
+    "version": "1.0.0",
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Perspective\\CheckoutSuccessInfo\\": ""
+        }
+    }
+}

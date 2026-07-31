@@ -1,0 +1,40 @@
+<?php
+declare(strict_types=1);
+
+use Hyva\Theme\Model\ViewModelRegistry;
+use Magento\Framework\Escaper;
+use Magento\Checkout\Block\Onepage\Success;
+use Perspective\CheckoutSuccessInfo\ViewModel\Checkout\AdditionalInfo;
+
+/** @var Success $block */
+/** @var ViewModelRegistry $viewModels */
+/** @var Escaper $escaper */
+/** @var AdditionalInfo $viewModel */
+
+$viewModel = $viewModels->require(AdditionalInfo::class);
+$customerReference = $viewModel->getCustomerReference($block->getOrderId());
+$deliveryComment = $viewModel->getDeliveryComment($block->getOrderId());
+$orderStatus = $viewModel->getOrderStatus($block->getOrderId())
+?>
+<div class="additional">
+    <h1 style="color: deeppink; font-size: large"><?= $escaper->escapeHtml(__('Additional Order Information')) ?></h1>
+
+    <div>
+        <span style="font-weight: bold"><?= $escaper->escapeHtml(__('Order Status: ')) ?></span>
+        <span class="order-status"><?= $escaper->escapeHtml(__($orderStatus)) ?></span>
+    </div>
+
+    <?php if ($deliveryComment): ?>
+    <div>
+        <span class="note-list-customer" style="font-weight: bold"><?= $escaper->escapeHtml(__('Customer Delivery Comment: ')) ?></span>
+        <span class="customer-reference"><?= $escaper->escapeHtml($deliveryComment, ['b', 'br', 'strong', 'i', 'u', 'a']) ?>
+    </div>
+    <?php endif; ?>
+
+    <?php if ($customerReference): ?>
+    <div>
+        <span class="note-list-customer" style="font-weight: bold"><?= $escaper->escapeHtml(__('Customer Reference: ')) ?></span>
+        <span class="customer-reference"><?= $escaper->escapeHtml($customerReference, ['b', 'br', 'strong', 'i', 'u', 'a']) ?>
+    </div>
+    <?php endif; ?>
+</div>
