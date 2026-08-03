@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="hyva.checkout.components">
+            <container name="checkout.ps.company.section" htmlTag="fieldset" htmlId="company">
+                <block name="ps.company.title" template="Hyva_Checkout::section/title.phtml">
+                    <arguments>
+                        <argument name="html_tag" xsi:type="string">legend</argument>
+                    </arguments>
+                    <action method="setTitle">
+                        <argument name="title" translate="true" xsi:type="string">Company Information</argument>
+                    </action>
+                </block>
+                <block name="checkout.ps.company"  as="company" before="-"
+                       template="Perspective_B2BCheckout::magewire/component/company-info.phtml">
+                    <arguments>
+                        <argument name="magewire" xsi:type="object">
+                            Perspective\B2BCheckout\Magewire\Checkout\CompanyInfo
+                        </argument>
+                    </arguments>
+                </block>
+            </container>
+        </referenceBlock>
+    </body>
+</page>

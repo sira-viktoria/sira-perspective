@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Hyva_Checkout:etc/hyva_checkout.xsd">
+    <checkout name="b2b" label="B2B Checkout" parent="default">
+        <step name="company" label="Company Information" route="company" after="shipping" >
+            <update handle="hyva_checkout_default_customer" if="is_customer"/>
+        </step>
+    </checkout>
+</config>
+
