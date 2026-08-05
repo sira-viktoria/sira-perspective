@@ -1,0 +1,29 @@
+<!--@subject Your reservation has expired @-->
+
+{{template config_path="design/email/header_template"}}
+
+<table class="main" width="100%" cellpadding="0" cellspacing="0" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">
+    <tr>
+        <td style="padding: 20px 0;">
+            <h1 style="font-size: 24px; color: #333; margin-bottom: 15px;">Dear {{var order.customer_firstname}},</h1>
+            <p style="font-size: 16px; line-height: 1.5; color: #555;">
+                Your reservation <strong>#{{var order.increment_id}}</strong> has expired (24 hours have passed).
+            </p>
+
+            <p style="font-size: 16px; line-height: 1.5; color: #555;">
+                As a result, the order was automatically canceled.
+            </p>
+
+            <div style="background-color: #fff3cd; border-left: 4px solid #ffc107; padding: 15px; margin: 20px 0;">
+                <p style="margin: 0; font-size: 15px; color: #856404;">
+                    If you're still interested in this item, you can rebook it or make a regular purchase directly on our website.                </p>
+            </div>
+
+            <p style="font-size: 14px; color: #777; margin-top: 25px;">
+                Thank you for shopping at our store!
+            </p>
+        </td>
+    </tr>
+</table>
+
+{{template config_path="design/email/footer_template"}}

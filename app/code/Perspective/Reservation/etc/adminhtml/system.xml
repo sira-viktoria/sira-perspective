@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="sales">
+            <tab>sales</tab>
+            <resource>Perspective_Reservation::config</resource>
+            <group id="reservation_general" translate="label" type="text" sortOrder="10"
+                   showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Reservation General</label>
+
+                <field id="reservation_customer_template" translate="label comment" type="select" sortOrder="10"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Customer Email Template (Reservation)</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                    <comment>An email sent to the customer after a successful reservation.</comment>
+                </field>
+
+                <field id="reservation_admin_template" translate="label comment" type="select" sortOrder="20"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Admin Email Template (Reservation)</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                    <comment>An email sent to the admin after a successful reservation.</comment>
+                </field>
+
+                <field id="reservation_canceled_template" translate="label comment" type="select" sortOrder="30"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Email Template (Canceling a Reservation)</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                    <comment>Email to the customer if the reservation is automatically canceled after 24 hours.</comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

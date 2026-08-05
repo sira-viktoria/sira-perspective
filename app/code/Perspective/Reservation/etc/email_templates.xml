@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Email:etc/email_templates.xsd">
+
+    <template id="sales_reservation_general_reservation_customer_template"
+              label="Product Reservation Email to the Customer"
+              file="reservation_customer.html"
+              type="html"
+              module="Perspective_Reservation"
+              area="frontend"/>
+
+    <template id="sales_reservation_general_reservation_admin_template"
+              label="Product Reservation: Email to the Admin"
+              file="reservation_admin.html"
+              type="html"
+              module="Perspective_Reservation"
+              area="frontend"/>
+
+    <template id="sales_reservation_general_reservation_canceled_template"
+              label="Product Reservation: Canceling a Reservation"
+              file="reservation_canceled.html"
+              type="html"
+              module="Perspective_Reservation"
+              area="frontend"/>
+</config>

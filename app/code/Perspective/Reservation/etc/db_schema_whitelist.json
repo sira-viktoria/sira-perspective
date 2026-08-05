@@ -1,0 +1,12 @@
+{
+    "sales_order": {
+        "column": {
+            "is_reservation": true
+        }
+    },
+    "sales_order_grid": {
+        "column": {
+            "is_reservation": true
+        }
+    }
+}

@@ -1,0 +1,33 @@
+<!--@subject Your item has been successfully reserved! @-->
+<!--@vars {
+"var order.increment_id":"Order Number",
+"var until_date":"Reserved until"
+} @-->
+
+{{template config_path="design/email/header_template"}}
+
+<table class="main" width="100%" cellpadding="0" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">
+    <tr>
+        <td style="padding: 20px 0;">
+            <h1 style="font-size: 24px; color: #333; margin-bottom: 15px;">Congratulations, {{var order.customer_firstname}}!</h1>
+            <p style="font-size: 16px; line-height: 1.5; color: #555;">
+                You have successfully reserved an item on our website. A reservation order has been created for you.<strong>#{{var order.increment_id}}</strong>.
+            </p>
+
+            <div style="background-color: #f9f9f9; border-left: 4px solid #007dbd; padding: 15px; margin: 20px 0;">
+                <p style="margin: 0; font-size: 16px; color: #333;">
+                    <strong>Important information:</strong>The item has been set aside in the warehouse and is ready for you to pick up.
+                </p>
+                <p style="margin: 5px 0 0 0; font-size: 16px; color: #d9534f;">
+                    <strong>Reservation valid until:</strong> {{var until_date}}
+                </p>
+            </div>
+
+            <p style="font-size: 14px; color: #777; margin-top: 25px;">
+                If you do not pick up your order within 24 hours, it will be automatically canceled.
+            </p>
+        </td>
+    </tr>
+</table>
+
+{{template config_path="design/email/footer_template"}}

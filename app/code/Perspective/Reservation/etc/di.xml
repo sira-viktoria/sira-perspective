@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <preference for="Perspective\Reservation\Api\ReservationManagementInterface"
+                type="Perspective\Reservation\Model\ReservationManagement" />
+    <preference for="Perspective\Reservation\Api\ReservationEmailManagementInterface"
+                type="Perspective\Reservation\Model\ReservationEmailManagement" />
+</config>

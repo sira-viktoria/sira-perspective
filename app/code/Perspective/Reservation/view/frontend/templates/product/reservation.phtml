@@ -1,0 +1,127 @@
+<?php
+/** @var Template $block */
+
+use Magento\Framework\View\Element\Template;
+
+?>
+<div class="reservation-wrapper" style="margin-top: 15px;">
+    <button type="button" id="open-reservation-modal" class="action primary button-reservation">
+        <span><?= __('Reserve for 24 hours') ?></span>
+    </button>
+</div>
+
+<div id="reservation-modal-form" style="display:none;">
+    <form class="form reservation" id="reservation-form" method="post" data-mage-init='{"validation":{}}'>
+        <fieldset class="fieldset">
+            <div class="field name required">
+                <label class="label" for="res-name"><span><?= __('Name') ?></span></label>
+                <div class="control">
+                    <input type="text" name="name" id="res-name" title="<?= __('Name') ?>" class="input-text" data-validate="{required:true}">
+                </div>
+            </div>
+            <div class="field email required">
+                <label class="label" for="res-email"><span><?= __('Email') ?></span></label>
+                <div class="control">
+                    <input type="email" name="email" id="res-email" title="<?= __('Email') ?>" class="input-text" data-validate="{required:true, 'validate-email':true}">
+                </div>
+            </div>
+            <div class="field telephone">
+                <label class="label" for="res-telephone"><span><?= __('Telephone') ?></span></label>
+                <div class="control">
+                    <input type="text" name="telephone" id="res-telephone" title="<?= __('Telephone') ?>" class="input-text">
+                </div>
+            </div>
+            <input type="hidden" name="product_id" value="<?= $block->getRequest()->getParam('id') ?>">
+        </fieldset>
+    </form>
+</div>
+
+<script>
+    require([
+        'jquery',
+        'Magento_Ui/js/modal/modal',
+        'mage/validation'
+    ], function($, modal) {
+        let options = {
+            type: 'popup',
+            responsive: true,
+            innerScroll: true,
+            title: '<?= __('Reserving an Item') ?>',
+            buttons: [{
+                text: '<?= __('Send') ?>',
+                class: 'action primary submit-reservation',
+                click: function () {
+                    let form = $('#reservation-form');
+                    if (form.valid()) {
+                        submitReservationForm(form);
+                    }
+                }
+            }]
+        };
+
+        let popup = modal(options, $('#reservation-modal-form'));
+
+        $('#open-reservation-modal').on('click', function() {
+            $('#reservation-modal-form').modal('openModal');
+        });
+
+        function submitReservationForm(form, $submitBtn) {
+            let productForm = $('#product_addtocart_form');
+            let formData = '';
+
+            if (productForm.length) {
+                formData = productForm.serialize() + '&' + form.serialize();
+            } else {
+                formData = form.serialize();
+            }
+
+            $.ajax({
+                url: '<?= $block->getUrl('reservation/index/save') ?>',
+                type: 'POST',
+                data: formData,
+                dataType: 'json',
+                showLoader: true,
+                success: function(response) {
+                    if (response.success) {
+                        alert(response.message);
+                        $('#reservation-modal-form').modal('closeModal');
+                        form[0].reset();
+                    } else {
+                        alert(response.message);
+                        $('#reservation-modal-form').modal('closeModal');
+                        form[0].reset();
+                    }
+                    // $submitBtn.prop('disabled', false).removeClass('_disabled');
+                },
+                error: function() {
+                    alert('<?= __('An error has occurred. Please try again later.') ?>');
+                    $('#reservation-modal-form').modal('closeModal');
+                    form[0].reset();
+                }
+            });
+        }
+
+
+        $('#res-email').on('blur', function() {
+            let email = $(this).val();
+            if (email && $('#reservation-form').validate().element('#res-email')) {
+                $.ajax({
+                    url: '<?= $block->getUrl('reservation/index/checkcustomer') ?>',
+                    type: 'POST',
+                    data: {email: email},
+                    dataType: 'json',
+                    success: function(response) {
+                        if (response.exists) {
+                            if (response.firstname || response.lastname) {
+                                $('#res-name').val(response.firstname + ' ' + response.lastname);
+                            }
+                            if (response.telephone) {
+                                $('#res-telephone').val(response.telephone);
+                            }
+                        }
+                    }
+                });
+            }
+        });
+    });
+</script>

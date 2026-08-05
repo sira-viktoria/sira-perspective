@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <sales>
+            <reservation_general>
+                <reservation_customer_template>sales_reservation_general_reservation_customer_template</reservation_customer_template>
+                <reservation_admin_template>sales_reservation_general_reservation_admin_template</reservation_admin_template>
+                <reservation_canceled_template>sales_reservation_general_reservation_canceled_template</reservation_canceled_template>
+            </reservation_general>
+        </sales>
+    </default>
+</config>
