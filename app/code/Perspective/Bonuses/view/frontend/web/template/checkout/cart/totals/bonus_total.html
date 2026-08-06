@@ -1,0 +1,19 @@
+<!-- ko if: isDisplayed() -->
+<!-- ko if: getPureValue() != 0 -->
+<tr class="totals bonus_total excl">
+
+    <th class="mark" colspan="1" scope="row" data-bind="text: title"></th>
+    <td class="amount">
+        <span class="price" data-bind="text: getValue()"></span>
+
+    </td>
+</tr>
+<!-- /ko -->
+<!-- ko foreach: getBonusMessages() -->
+<tr class="bonus_message">
+    <th colspan="2" style="border-top: none; text-align: left; padding: 4px 4px;">
+        <span data-bind="text: $data"></span>
+    </th>
+</tr>
+<!-- /ko -->
+<!-- /ko -->

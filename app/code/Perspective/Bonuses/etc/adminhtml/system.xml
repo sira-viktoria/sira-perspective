@@ -1,0 +1,91 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="sales">
+            <tab>sales</tab>
+            <resource>Perspective_Bonuses::config</resource>
+            <group id="perspective_bonuses" translate="label"
+                   type="text" sortOrder="1000" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Perspective Bonuses</label>
+                <group id="discount_category" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Discount Category</label>
+                    <field id="enabled" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Enable</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="category_id" type="multiselect" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Ccategory</label>
+                        <source_model>Perspective\Bonuses\Model\Config\Source\CategoryList</source_model>
+                        <depends><field id="enabled">1</field></depends>
+                    </field>
+                    <field id="min_qty" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Min QTY</label>
+                        <validate>validate-digits validate-not-negative-number validate-digits-range</validate>
+                        <depends><field id="enabled">1</field></depends>
+                    </field>
+
+                    <field id="percent" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Discount (%)</label>
+                        <validate>validate-digits validate-not-negative-number validate-digits-range digits-range-0-100</validate>
+                        <depends><field id="enabled">1</field></depends>
+                    </field>
+                </group>
+                <group id="discount_shipping" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Discount Shipping</label>
+                    <field id="enabled" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Enable</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="first_threshold_min_total" sortOrder="20" translate="label" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>First minimum total ($)</label>
+                        <depends><field id="enabled">1</field></depends>
+                        <validate>validate-digits validate-not-negative-number validate-digits-range</validate>
+                    </field>
+
+                    <field id="first_threshold_discount_value" sortOrder="30" translate="label" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>First threshold discount (%)</label>
+                        <depends><field id="enabled">1</field></depends>
+                        <validate>validate-digits validate-not-negative-number validate-digits-range digits-range-0-100</validate>
+                    </field>
+
+                    <field id="second_threshold_min_total" sortOrder="40" translate="label" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Second minimum total ($)</label>
+                        <depends><field id="enabled">1</field></depends>
+                        <validate>validate-digits validate-not-negative-number validate-digits-range</validate>
+                    </field>
+
+                    <field id="second_threshold_discount_value" sortOrder="50" translate="label" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Second threshold discount (%)</label>
+                        <depends><field id="enabled">1</field></depends>
+                        <validate>validate-digits validate-not-negative-number validate-digits-range digits-range-0-100</validate>
+                    </field>
+
+                    <field id="free_shipping" type="select" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Free shipping</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <depends><field id="enabled">1</field></depends>
+                    </field>
+                </group>
+                <group id="gift" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Gift</label>
+                    <field id="enabled" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Enable</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="threshold_min_total" sortOrder="20" translate="label" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Minimum total ($)</label>
+                        <depends><field id="enabled">1</field></depends>
+                        <validate>validate-digits validate-not-negative-number validate-digits-range</validate>
+                    </field>
+                    <field id="gift_sku" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Product</label>
+                        <source_model>Perspective\Bonuses\Model\Config\Source\ProductList</source_model>
+                        <depends><field id="enabled">1</field></depends>
+                    </field>
+                </group>
+            </group>
+        </section>
+    </system>
+</config>

@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Perspective\Bonuses\Model\Bonus\Manager">
+        <arguments>
+            <argument name="bonuses" xsi:type="array">
+                <item name="category_qty" xsi:type="object">Perspective\Bonuses\Model\Bonus\Types\CategoryQty</item>
+                <item name="shipping" xsi:type="object">Perspective\Bonuses\Model\Bonus\Types\Shipping</item>
+                <item name="gift" xsi:type="object">Perspective\Bonuses\Model\Bonus\Types\Gift</item>
+            </argument>
+        </arguments>
+    </type>
+</config>
