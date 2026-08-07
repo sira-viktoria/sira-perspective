@@ -46,7 +46,10 @@ class DefaultCustomPrice
     public function getDefaultCustomPrice($object): float
     {
         $price = $object->getData('price');
-
+        $customPrice = $object->getData('custom_price');
+        if ($customPrice && $customPrice > 0) {
+            return (float)$customPrice;
+        }
         if (!$price) {
             /** @var Configurable $typeInstance */
             $typeInstance = $object->getTypeInstance();
