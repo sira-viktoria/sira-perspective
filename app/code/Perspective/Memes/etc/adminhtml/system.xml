@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="perspective_tab" translate="label" sortOrder="1">
+            <label>Perspective</label>
+        </tab>
+
+        <section id="ps_giphy_memes" sortOrder="100" translate="label" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+            <label>Giphy Memes Config</label>
+            <tab>perspective_tab</tab>
+            <resource>Perspective_Memes::config</resource>
+
+            <group id="general_settings" sortOrder="10" translate="label" type="text" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                <attribute type="expanded">1</attribute>
+                <label>General Settings</label>
+
+                <field id="enabled" sortOrder="10" translate="label" type="select" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Module enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+
+                <field id="gifs_count" sortOrder="20" translate="label" type="text" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>GIFs Count</label>
+                    <validate>validate-digits validate-not-negative-number validate-digits-range required</validate>
+                    <comment>Number of GIFs to fetch from Giphy. Must be greater than 0</comment>
+                    <depends><field id="enabled">1</field></depends>
+                </field>
+
+                <field id="api_url" sortOrder="30" translate="label" type="text" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Giphy API URL</label>
+                    <validate>required</validate>
+                    <comment>Full URL to Giphy API endpoint (without parameters). Default: https://api.giphy.com/v1/gifs/search</comment>
+                    <depends><field id="enabled">1</field></depends>
+                </field>
+
+                <field id="api_key" sortOrder="40" translate="label" type="password" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Giphy API Key</label>
+                    <validate>required</validate>
+                    <comment>Your Giphy API Key for requests</comment>
+                    <depends><field id="enabled">1</field></depends>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

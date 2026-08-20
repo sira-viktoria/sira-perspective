@@ -1,0 +1,8 @@
+.memes-actions {
+    justify-content: space-between;
+    align-items: center;
+}
+
+.memes-actions .action {
+    float: none !important;
+}

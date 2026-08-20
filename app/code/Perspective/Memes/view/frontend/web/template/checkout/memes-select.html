@@ -1,0 +1,32 @@
+<li id="memes"
+    class="checkout-step"
+    data-bind="fadeVisible: isVisible">
+
+    <div class="step-title"
+         data-bind="i18n: 'Memes'"
+         data-role="title">
+    </div>
+
+    <div class="step-content"
+         data-role="content">
+
+        <div id="react-meme-picker"></div>
+
+        <div class="actions-toolbar memes-actions">
+
+            <button type="button"
+                    class="action secondary"
+                    data-bind="click: navigateBack">
+                <span data-bind="i18n: 'Back'"></span>
+            </button>
+
+            <button type="button"
+                    class="action primary"
+                    data-bind="click: navigateToNextStep">
+                <span data-bind="i18n: 'Next'"></span>
+            </button>
+
+        </div>
+    </div>
+
+</li>

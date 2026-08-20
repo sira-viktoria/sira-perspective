@@ -1,0 +1,34 @@
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      layout="1column"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Perspective_Memes::css/memes.css"/>
+        <css src="https://unpkg.com/react-image-picker/dist/index.css" src_type="url"/>
+    </head>
+    <body>
+        <referenceBlock name="checkout.root">
+            <arguments>
+                <argument name="jsLayout" xsi:type="array">
+                    <item name="components" xsi:type="array">
+                        <item name="checkout" xsi:type="array">
+                            <item name="children" xsi:type="array">
+                                <item name="steps" xsi:type="array">
+                                    <item name="children" xsi:type="array">
+                                        <!-- The new step you add -->
+                                        <item name="memes-step" xsi:type="array">
+                                            <item name="component" xsi:type="string">Perspective_Memes/js/view/checkout/memes-step</item>
+                                            <item name="sortOrder" xsi:type="string">15</item>
+                                            <item name="displayArea" xsi:type="string">steps</item>
+                                            <item name="children" xsi:type="array">
+                                            </item>
+                                        </item>
+                                    </item>
+                                </item>
+                            </item>
+                        </item>
+                    </item>
+                </argument>
+            </arguments>
+        </referenceBlock>
+    </body>
+</page>

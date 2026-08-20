@@ -1,0 +1,36 @@
+<?php
+/** @var Template $block
+ *@var Escaper $escaper
+ */
+use Magento\Framework\Escaper;
+use Magento\Framework\View\Element\Template;
+use Perspective\Memes\ViewModel\Adminhtml\Memes;
+/** @var Memes $viewModel */
+$viewModel = $block->getData('viewModel');
+
+$memesData = $viewModel->getJsonMemesData();
+$quoteId = $viewModel->getQuoteId();
+$uid = uniqid('meme-picker-');
+?>
+
+<div class="admin__page-section"></div> <!-- spacer -->
+
+<section class="admin__page-section">
+    <div class="admin__page-section-title">
+        <span class="title"><?= $escaper->escapeHtml(__('Memes')) ?></span>
+    </div>
+    <div class="admin__page-section-content">
+        <div id="<?= $uid ?>"></div>
+    </div>
+</section>
+
+<script type="text/x-magento-init">
+    {
+        "#<?= $uid ?>": {
+        "Perspective_Memes/js/view/meme-picker": {
+            "memes": <?= $memesData ?>,
+            "quoteId": <?= $quoteId ?>
+    }
+}
+}
+</script>

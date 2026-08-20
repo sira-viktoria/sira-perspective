@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Perspective\Memes\Model\Checkout\MemeConfigProvider">
+        <arguments>
+            <argument name="checkoutSession" xsi:type="object">Magento\Checkout\Model\Session\Proxy</argument>
+        </arguments>
+    </type>
+
+    <type name="Perspective\Memes\Observer\CopyMemesToAdminQuote">
+        <arguments>
+            <argument name="adminQuoteSession" xsi:type="object">Magento\Backend\Model\Session\Quote\Proxy</argument>
+        </arguments>
+    </type>
+
+    <type name="Perspective\Memes\ViewModel\Adminhtml\OrderEditMemes">
+        <arguments>
+            <argument name="adminQuoteSession" xsi:type="object">Magento\Backend\Model\Session\Quote\Proxy</argument>
+        </arguments>
+    </type>
+</config>

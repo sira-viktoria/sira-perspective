@@ -1,0 +1,28 @@
+<?php
+/** @var Template $block
+ * @var Escaper $escaper
+ */
+use Magento\Framework\Escaper;
+use Magento\Framework\View\Element\Template;
+
+$order = $block->getOrder();
+$orderMemes = $order->getOrderMemes();
+
+$memesJson = $orderMemes ?: 'null';
+$uid = 'meme-' . $order->getIncrementId();
+?>
+
+<td data-th="<?= $escaper->escapeHtml(__('Memes')) ?>" class="col extra">
+    <div id="<?= $uid ?>"></div>
+
+    <script type="text/x-magento-init">
+        {
+            "#<?= $uid ?>": {
+                "Perspective_Memes/js/view/customer/order-history-memes": {
+                    "memes": <?= $memesJson ?>
+        }
+    }
+}
+    </script>
+</td>
+
