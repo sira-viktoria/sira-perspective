@@ -1,0 +1,14 @@
+<?php
+
+use Magento\Framework\View\Element\Template;
+use Perspective\Voting\ViewModel\WinnerLabel;
+
+/** @var Template $block */
+/** @var WinnerLabel $viewModel */
+$viewModel = $block->getData('viewModel');
+?>
+
+<span style="color: red; font-weight: bolder">
+    <?= /* @noEscape */ $viewModel->getWinnerHtml() ?>
+</span>
+

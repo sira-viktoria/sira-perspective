@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tests xmlns:xsi="http://w3.org"
+       xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/testSchema.xsd">
+    <test name="PerspectiveVotingCheckTest">
+        <annotations>
+            <features value="Perspective Voting"/>
+            <group value="Perspective_Voting"/>
+            <stories value="Perspective Voting"/>
+            <title value="Perspective Voting Title"/>
+            <description value="Perspective Voting Description"/>
+            <severity value="CRITICAL"/>
+        </annotations>
+
+        <before>
+            <actionGroup ref="AdminLoginActionGroup" stepKey="loginAsAdmin"/>
+<!--            <actionGroup ref="AdminCreateVotingActionGroup" stepKey="createVoting">-->
+<!--                <argument name="votingTitle" value="MFTF Voting"/>-->
+<!--            </actionGroup>-->
+            <actionGroup ref="AdminLogoutActionGroup" stepKey="logoutAdmin"/>
+
+<!--            <actionGroup ref="LoginToStorefrontActionGroup" stepKey="loginCustomerAsPrecondition">-->
+<!--                <argument name="Customer" value="_defaultCustomer"/>-->
+<!--            </actionGroup>-->
+        </before>
+
+
+
+
+
+        <!--        <after>-->
+<!--            <actionGroup ref="StorefrontCustomerLogoutActionGroup" stepKey="loginCustomer"/>-->
+<!--        </after>-->
+
+
+        <amOnPage url="/" stepKey="goToHome"/>
+<!--        <amOnPage url="customer/account/login" stepKey="goToLogin"/>-->
+
+<!--        <fillField selector="#email" userInput="vika50@gmail.com" stepKey="fillEmail"/>-->
+<!--        <fillField selector="#password" userInput="Aws_11111" stepKey="fillPass"/>-->
+
+        <!-- Клік через JS двигун браузера -->
+<!--        <executeInSelenium action="executeScript" jsonArray="['document.querySelector(\'#send2\').click();']" stepKey="clickOnLoginViaJS"/>-->
+
+<!--        <click type="button" selector="#send2" stepKey="clickOnLogin"/>-->
+
+<!--        <click selector="{{StorefrontVotingSection.loginButton}}" stepKey="clickOnLogin"/>-->
+
+
+        <amOnPage url="/" stepKey="goToHome2"/>
+<!--        <amOnPage url="customer/account" stepKey="goToAccount"/>-->
+        <amOnPage url="women.html" stepKey="goToPLP"/>
+        <amOnPage url="perspective_voting" stepKey="goToVoting"/>
+        <click selector="{{StorefrontVotingSection.optionInCardByNumber('MFTF Voting', '1')}}" stepKey="selectSecond"/>
+<!--        <amOnPage url="wishlist" stepKey="goToWishlist"/>-->
+
+<!--        <makeScreenshot stepKey="screenshotOfMyVotingPage"/>-->
+    </test>
+</tests>

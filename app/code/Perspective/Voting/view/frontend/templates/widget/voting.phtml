@@ -1,0 +1,29 @@
+<?php
+use Perspective\Voting\Block\Widget\Voting;
+/** @var Voting $block */
+
+$votingId = $block->getData('voting_id');
+$uniqueId = 'voting_widget_' . uniqid() . '_' . $votingId;
+$votingData = $block->prepareVotingData();
+?>
+<link rel="stylesheet" type="text/css" href="<?= $block->getViewFileUrl('Perspective_Voting::css/voting.css') ?>">
+<div id="<?= $uniqueId ?>"
+     data-bind="scope:'voting-scope-<?= $votingId ?>'"
+     class="voting-widget-item"
+>
+    <!-- ko template: getTemplate() --><!-- /ko -->
+    <script type="text/x-magento-init">
+        {
+            "#<?= $uniqueId ?>": {
+                "Magento_Ui/js/core/app": {
+                    "components": {
+                        "voting-scope-<?= $votingId ?>": {
+                            "component": "Perspective_Voting/js/view/voting",
+                            "votingData": <?= json_encode($votingData) ?>
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</div>

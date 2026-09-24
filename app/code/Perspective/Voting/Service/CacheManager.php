@@ -1,0 +1,107 @@
+<?php
+declare(strict_types=1);
+
+namespace Perspective\Voting\Service;
+
+use Magento\Framework\App\CacheInterface;
+use Magento\Framework\Serialize\SerializerInterface;
+
+/**
+ * CacheManager Class.
+ */
+class CacheManager
+{
+    public const string VOTING_CACHE_KEY_PREFIX = 'VOTING_DATA_CACHE_%s';
+    public const string CACHE_TAG = 'PERSPECTIVE_VOTING';
+    public const string VOTING_WINNERS_CACHE = 'VOTING_WINNERS_CACHE';
+
+    /**
+     * @var CacheInterface
+     */
+    protected CacheInterface $cache;
+
+    /**
+     * @var SerializerInterface
+     */
+    protected SerializerInterface $serializer;
+
+    /**
+     * CacheManager constructor.
+     *
+     * @param CacheInterface $cache
+     * @param SerializerInterface $serializer
+     */
+    public function __construct(
+        CacheInterface $cache,
+        SerializerInterface $serializer
+    ) {
+        $this->cache = $cache;
+        $this->serializer = $serializer;
+    }
+
+    /**
+     * @param int $votingId
+     * @return array
+     */
+    public function getVotingCache(int $votingId): array
+    {
+        $cacheId = sprintf(self::VOTING_CACHE_KEY_PREFIX, $votingId);
+        $data = $this->cache->load($cacheId);
+        if ($data) {
+            return $this->serializer->unserialize($data);
+        }
+        return [];
+    }
+
+    /**
+     * @param int $votingId
+     * @param array $data
+     * @return void
+     */
+    public function saveVotingCache(int $votingId, array $data): void
+    {
+        $cacheId = sprintf(self::VOTING_CACHE_KEY_PREFIX, $votingId);
+        $this->cache->save($this->serializer->serialize($data), $cacheId, [self::CACHE_TAG], 3600);
+    }
+
+    /**
+     * @param int $votingId
+     * @return void
+     */
+    public function deleteVotingCache(int $votingId): void
+    {
+        $cacheId = sprintf(self::VOTING_CACHE_KEY_PREFIX, $votingId);
+        $this->cache->remove($cacheId);
+        //clean by tag?
+    }
+
+    /**
+     * @return array|null
+     */
+    public function getWinnersCache(): ?array
+    {
+        $data = $this->cache->load(self::VOTING_WINNERS_CACHE);
+        if ($data) {
+            return $this->serializer->unserialize($data);
+        } else {
+            return null;
+        }
+    }
+
+    /**
+     * @param array $data
+     * @return void
+     */
+    public function saveWinnersCache(array $data): void
+    {
+        $this->cache->save($this->serializer->serialize($data), self::VOTING_WINNERS_CACHE, [self::CACHE_TAG], 300);
+    }
+
+    /**
+     * @return void
+     */
+    public function deleteWinnersCache(): void
+    {
+        $this->cache->remove(self::VOTING_WINNERS_CACHE);
+    }
+}

@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Config/etc/config.xsd">
+    <default>
+        <perspective_voting>
+            <general_settings>
+                <enabled>0</enabled>
+                <allow_admin_edit_votes>0</allow_admin_edit_votes>
+                <product_discount_label>0</product_discount_label>
+                <product_discount_percent>0</product_discount_percent>
+                <votes_refresh_frequency>*/2 * * * *</votes_refresh_frequency>
+                <voting_auto_finish_frequency>*/5 * * * *</voting_auto_finish_frequency>
+                <product_discount_duration>1</product_discount_duration>
+                <guest_cookie_ttl>30</guest_cookie_ttl>
+                <product_discount_label_template>Voting Winner Discount ({{percent}})</product_discount_label_template>
+                <display_votings_link_in_top_menu>0</display_votings_link_in_top_menu>
+            </general_settings>
+        </perspective_voting>
+    </default>
+</config>

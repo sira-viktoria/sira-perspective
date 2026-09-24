@@ -1,0 +1,93 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="perspective_tab" translate="label" sortOrder="1">
+            <label>Perspective</label>
+        </tab>
+
+        <section id="perspective_voting" sortOrder="10" translate="label" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Voting Config</label>
+            <tab>perspective_tab</tab>
+            <resource>Perspective_Voting::config</resource>
+
+            <group id="general_settings" sortOrder="10" translate="label" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+                <attribute type="expanded">1</attribute>
+                <label>General Settings</label>
+
+                <field id="enabled" translate="label" sortOrder="10" type="select" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Module enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+
+                <field id="allow_admin_edit_votes" translate="label" sortOrder="20" type="select" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Allow Admin Set Additional Votes</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+
+                <field id="product_discount_label" translate="label" sortOrder="30" type="select" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Product Discount + Label Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Enable/disable applying discount and showing label on products for votes</comment>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+
+                <field id="product_discount_duration" translate="label comment" sortOrder="40" type="text" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Discount Duration (hours)</label>
+                    <comment>How many hours the discount will be active for the winning product after voting ends.</comment>
+                    <validate>validate-digits validate-greater-than-zero</validate>
+                    <depends>
+                        <field id="enabled">1</field>
+                        <field id="product_discount_label">1</field>
+                    </depends>
+                </field>
+
+                <field id="product_discount_label_template" translate="label" sortOrder="50" type="editor" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Winner Label Template</label>
+                    <comment>Use {{percent}} to display discount value.</comment>
+                    <frontend_model>Perspective\Voting\Block\Adminhtml\System\Config\Editor</frontend_model>
+                    <depends>
+                        <field id="enabled">1</field>
+                        <field id="product_discount_label">1</field>
+                    </depends>
+                </field>
+
+                <field id="votes_refresh_frequency" translate="label" sortOrder="60" type="text" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Votes Update Frequency (cron time)</label>
+                    <validate>required-entry</validate>
+                    <comment><![CDATA[Format: <code>minute hour day month day_of_week</code>. Example: <code>*/2 * * * *</code> (every 2 minutes).]]></comment>
+                    <depends><field id="enabled">1</field></depends>
+                </field>
+
+                <field id="voting_auto_finish_frequency" translate="label" sortOrder="70" type="text" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Voting Auto Finish Frequency (cron time)</label>
+                    <validate>required-entry</validate>
+                    <comment><![CDATA[Format: <code>minute hour day month day_of_week</code>. Example: <code>*/5 * * * *</code> (every 5 minutes).]]></comment>
+                    <depends><field id="enabled">1</field></depends>
+                </field>
+
+                <field id="guest_cookie_ttl" translate="label" sortOrder="80" type="text" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Guest Identification Lifetime (Days)</label>
+                    <comment>Number of days to store the guest cookie. Determines how long a guest is recognized by the system before their voting history is reset.</comment>
+                    <validate>validate-digits validate-greater-than-zero</validate>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+
+                <field id="display_voting_link_in_top_menu" translate="label" sortOrder="90" type="select" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Display Voting Link In Top Menu</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Enable to add "Voting" link to the main navigation bar</comment>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

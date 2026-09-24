@@ -1,0 +1,51 @@
+<?php
+declare(strict_types=1);
+
+namespace Perspective\Voting\Block\Adminhtml\System\Config;
+
+use Magento\Backend\Block\Template\Context;
+use Magento\Cms\Model\Wysiwyg\Config as WysiwygConfig;
+use Magento\Config\Block\System\Config\Form\Field;
+use Magento\Framework\Data\Form\Element\AbstractElement;
+
+/**
+ * Editor Config Class.
+ */
+class Editor extends Field
+{
+    /**
+     * @var WysiwygConfig
+     */
+    protected WysiwygConfig $wysiwygConfig;
+
+    /**
+     * Editor constructor.
+     *
+     * @param Context $context
+     * @param WysiwygConfig $wysiwygConfig
+     * @param array $data
+     */
+    public function __construct(
+        Context       $context,
+        WysiwygConfig $wysiwygConfig,
+        array         $data = []
+    ) {
+        $this->wysiwygConfig = $wysiwygConfig;
+        parent::__construct($context, $data);
+    }
+
+    /**
+     * Get WYSIWYG editor element HTML
+     *
+     * @param AbstractElement $element
+     *
+     * @return string
+     */
+    protected function _getElementHtml(AbstractElement $element): string
+    {
+        $element->setWysiwyg(true);
+        $element->setConfig($this->wysiwygConfig->getConfig($element));
+
+        return parent::_getElementHtml($element);
+    }
+}
